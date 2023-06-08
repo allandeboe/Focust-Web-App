@@ -3,7 +3,7 @@
  *
  * @see com.focust.api.controller
  *
- * This class exists to isolate common logic used by Controllers so that the code can be DRY and makes it easiers to
+ * This class exists to isolate common logic used by Controllers so that the code can be DRY and makes it easier to
  * create new Controllers if necessary.
  *
  * More accurately, this class contains functions that allow Controllers to implement
@@ -25,7 +25,6 @@ package com.focust.api.util;
 /*
  * Java Standard Library
  */
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,22 +32,16 @@ import java.util.Optional;
 /*
  * Java Spring
  */
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import com.focust.api.ServerProperties;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CLASS
 
 public final class Controller {
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    // STATIC DATA MEMBERS
-
-    @Autowired
-    private static Environment environment;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     // "CREATE" FUNCTIONS
@@ -188,9 +181,11 @@ public final class Controller {
      */
     public static <M> ResponseEntity<HttpStatus> deleteAll(JpaRepository<M, Long> repository) {
         try {
-
-            repository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            if (ServerProperties.isInDevMode()) {
+                repository.deleteAll();
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
         catch (Exception e) {
             e.printStackTrace(); // for debugging purposes (should only be seen by developers!)
@@ -215,7 +210,7 @@ public final class Controller {
      */
     public static <M> ResponseEntity<HttpStatus> delete(JpaRepository<M, Long> repository, long id) {
         try {
-            if (Controller.isInDevMode()) {
+            if (ServerProperties.isInDevMode()) {
                 repository.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -227,18 +222,4 @@ public final class Controller {
         }
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    // OTHER METHODS
-
-    /**
-     * isInDevMode(): boolean
-     *
-     * checks if the server is being run on "dev" (short for "developer") mode.
-     *
-     * @return whether or not the server is being run on "dev" mode.
-     * @throws IOException
-     */
-    public static boolean isInDevMode() {
-        return (environment.getProperty("focust.server-mode").equalsIgnoreCase("dev"));
-    }
 }

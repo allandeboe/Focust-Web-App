@@ -4,10 +4,10 @@
  * @see com.focust.api.model.User
  *
  * This class is a Data Transfer Object (DTO) that is meant to only transfer non-sensitive user data back to the
- * client.
+ * client. This is done to prevent a threat agent (i.e. a hacker) from easily having access to the password hash.
  *
- *
- *
+ * While it seems at first that having just a password has wouldn't be a bad idea, we want to make sure that a data
+ * breach isn't easily done by some script kiddie, hence the existence of these kinds of DTOs.
  *
  * @author Allan DeBoe
  */
@@ -26,8 +26,6 @@ import com.focust.api.model.User;
  *
  * Used to reduce boilerplate code and thus make it more readable and also makes it easy to create
  * these classes faster, since I am making this project on a time restriction to make it portfolio-ready.
- *
- * (Looking at all of the coding examples for a Java Spring Web App, I the
  *
  * Despite this, it does have security vulnerabilities. For example, the code that gets generated
  * for a getter method via the @Getter annotation in Lombok is vulnerable to external modification

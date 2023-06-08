@@ -27,8 +27,6 @@ import com.focust.api.util.Updatable;
  * Used to reduce boilerplate code and thus make it more readable and also makes it easy to create
  * these classes faster, since I am making this project on a time restriction to make it portfolio-ready.
  *
- * (Looking at all of the coding examples for a Java Spring Web App, I the
- *
  * Despite this, it does have security vulnerabilities. For example, the code that gets generated
  * for a getter method via the @Getter annotation in Lombok is vulnerable to external modification
  * as it returns the data member itself (i.e. the normal Java way of doing getter methods) rather
