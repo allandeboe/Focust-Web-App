@@ -1,7 +1,5 @@
-#Focust - Bugtracker and Project Management Web App
-*Focust* is a bugtracker and project management web application built using Java Spring, React.js, and MySQL. 
-
-It is meant to be a flapship portfolio project to demonstrate my skills as a software engineer and software developer regarding web development. Since it was made specifically for the portfolio, it is not meant to actually be used (even though it is meant to be built as if it was) and will be slowly expanded with some feature updates upon after it is considered *complete*. (i.e. meets the requirements I gave the project).
+# Focust - Java-Based Bugtracker and Project Management Web Application
+*Focust* is a bugtracker and project management web application (like Jira) built using *Java Spring*, *React.js*, and *MySQL* as well as a flapship portfolio project to demonstrate my skills as a software engineer and full-stack web developer.
 
 ## Set Up (for Running Locally)
 First, one should install *Node Project Manager* (`npm`), *Java Software Development Kit* (at least version 17), and *MySQL Database Community Edition*. 
@@ -9,7 +7,7 @@ First, one should install *Node Project Manager* (`npm`), *Java Software Develop
 Then, download the source code from this GitHub repository.
 
 ### Java Spring Back-end (REST API Server)
-To compile the Java-based Back-end, once must first create a `application.properties` file under the `focust-back-end/src/main/resources` directory and include the following code:
+To compile the Java-based REST API web server, once must first create a `application.properties` file under the `focust-back-end/src/main/resources` directory and insert the following code to that file:
 
 ```
 # Server-Mode
@@ -28,7 +26,7 @@ spring.datasource.password = [PASSWORD] # Replace with the password for the MySQ
 
 Then save the file. 
 
-After that, you should now be able to compile the program. To do that, open the terminal in the `focust-back-end` directory and run the following command:
+After that, you should now be able to compile the program. To do that, open the terminal in the `focust-back-end` directory and run the following commands:
 
 **Linux**
 ```
