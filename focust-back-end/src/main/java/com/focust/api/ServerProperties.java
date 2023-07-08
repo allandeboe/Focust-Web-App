@@ -19,6 +19,7 @@ import java.io.IOException;
 /*
  * Java Spring
  */
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,6 +27,7 @@ import org.springframework.core.env.Environment;
 
 public final class ServerProperties {
 
+    @Autowired
     private static Environment environment;
 
     /**
