@@ -1,140 +1,68 @@
-/***********************************************************************************************************************
- * UserController.java
+/**
+ * UserController
  *
- * @see com.focust.api.model.User
- * @see com.focust.api.util.Controller
+ * This class is the controller associated with the "User" model.
+ * It translates REST commands into actions that affect the "users"
+ * table in the database.
  *
- * This class represents the "Controller" corresponding to the table "users" in the Database.
+ * @see com.focust.api.model.data.User
  *
- * @author Allan DeBoe
+ * @author Allan DeBoe (allan.m.deboe@gmail.com)
+ * @date November 6th, 2023
  */
 package com.focust.api.controller;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// DEPENDENCIES / IMPORTS
+///////////////////////////////////////////////////////////
 
-/*
- * Java Standard Library
- */
+/** Focust **/
+import com.focust.api.controller.util.CRUDController;
+import com.focust.api.dto.UserDetails;
+import com.focust.api.dto.form.NewUserForm;
+import com.focust.api.model.data.User;
+import com.focust.api.model.repository.UserRepository;
+
+/** Standard Java **/
 import java.util.List;
+import java.util.Optional;
 
-/*
- * Focust
- */
-import com.focust.api.model.User;
-import com.focust.api.model.dto.SafeUserDTO;
-import com.focust.api.repository.UserRepository;
-import com.focust.api.util.Controller;
-
-/*
- * Java Spring
- */
-import org.springframework.beans.factory.annotation.Autowired;
+/** Spring Framework **/
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CLASS
+///////////////////////////////////////////////////////////
 
 @RestController
-@RequestMapping("/users")
-public final class UserController {
+@RequestMapping(value="/users")
+public class UserController {
 
     @Autowired
     UserRepository userRepository;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    // "http://localhost:8080/users"
+    @PutMapping(value="", produces="application/json")
+    public ResponseEntity<UserDetails> create(@RequestBody NewUserForm formData) {
 
-    /**
-     * getAllUsers(): ResponseEntity
-     *
-     * "GET http://localhost:8080/users"
-     *
-     * Returns a list of users on the site.
-     *
-     * @return a response to the client-side containing at least a Http Status Code.
-     */
-    @GetMapping("")
-    public ResponseEntity<List<SafeUserDTO>> getAllUsers() {
-        return Controller.getAll(userRepository);
+        Optional<User> existingUser = Optional.ofNullable(userRepository.getByUsername(formData.getUsername()));
+        if (existingUser.isPresent()) return new ResponseEntity<>(null, HttpStatus.OK);
+
+        return CRUDController.create(userRepository, formData, UserDetails.class);
     }
 
-    /**
-     * createUser(user: User): ResponseEntity
-     *
-     * "POST http://localhost:8080/users"
-     *
-     * Creates and adds a new user to the "users" table.
-     *
-     * For future implementations, the request body should be a Data Transfer Object
-     * (DTO) that contains user essentials so that both "users" and "authentication-info"
-     * tables will both have new entries.
-     *
-     * @return a response to the client-side containing at least a Http Status Code.
-     */
-    @PostMapping("")
-    public ResponseEntity<SafeUserDTO> createUser(@RequestBody User user) {
-        return Controller.create(userRepository, user);
+    @GetMapping(value="/{id}", produces="application/json")
+    public ResponseEntity<UserDetails> getById(@PathVariable long id) {
+        return CRUDController.getById(userRepository, id, UserDetails.class);
     }
 
-    /**
-     * deleteAllUsers(): ResponseEntity
-     *
-     * "DELETE http://localhost:8080/users"
-     *
-     * Deletes all of the users from the site.
-     *
-     * Should only be possible when testing/debugging the server using a mock database, and thus
-     * should be allowed to be used once deployed and connected to the real database
-     * (for security reasons).
-     *
-     * @see com.focust.api.util.Controller
-     *
-     * @return a response to the client-side containing a Http Status Code.
-     */
-    @DeleteMapping("")
-    public ResponseEntity<HttpStatus> deleteAllUsers() {
-        return Controller.deleteAll(userRepository);
-    }
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    // "http://localhost:8080/users/{id}"
-
-    /**
-     * getUserById(id: long): ResponseEntity
-     *
-     * Used to extract user information (except for sensitive user data) form a user
-     * with the given user id.
-     *
-     * @param id the id of the user in question.
-     * @return a response to the client-side that contains at least a Http Status Code.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<SafeUserDTO> getUserById(@PathVariable("id") long id) {
-        return Controller.getById(userRepository, id);
-    }
-
-    /**
-     * updateUser(id: long, user: User): ResponseEntity
-     *
-     * updates the data stored in the database.
-     *
-     * @param id the id of the user to be updated
-     * @param user a User instance that contains the data to be updated.
-     * @return a response to the client-side that contains at least a Http Status Code.
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<SafeUserDTO> updateUser(@PathVariable("id") long id, User user) {
-        return Controller.update(userRepository, id, user);
+    @GetMapping(value="", produces="application/json")
+    public ResponseEntity<List<UserDetails>> getAll() {
+        return CRUDController.getAll(userRepository, UserDetails.class);
     }
 
 }
