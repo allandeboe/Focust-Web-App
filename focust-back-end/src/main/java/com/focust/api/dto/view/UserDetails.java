@@ -8,7 +8,7 @@
  * @author Allan DeBoe (allan.m.deboe@gmail.com)
  * @date November 6th, 2023
  */
-package com.focust.api.dto;
+package com.focust.api.dto.view;
 
 ///////////////////////////////////////////////////////////
 

@@ -12,12 +12,10 @@ Before you can install the relevant dependencies for and set up the front-end or
 
 ## Back-end Server (Java Spring)
 
-### Installing Dependencies
-[Work in Progress]
-
-
 ### Setting Up
-After installing the dependencies on the device locally, one needs to create an `application.properties` file under the `focust-back-end/src/main/resources` directory. It's this file that contains important and sensitive information like the database password. 
+The dependencies the back-end needs should be there when downloading the project from GitHub, so, for the back-end, you only need to set up the back-end server so it can run as intended.
+
+To do this, one needs to create an `application.properties` file under the `focust-back-end/src/main/resources` directory. It's this file that contains important and sensitive information like the database password. 
 
 ```
 # Server-Mode

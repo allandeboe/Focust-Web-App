@@ -16,7 +16,7 @@ package com.focust.api.controller;
 
 /** Focust **/
 import com.focust.api.controller.util.CRUDController;
-import com.focust.api.dto.UserDetails;
+import com.focust.api.dto.view.UserDetails;
 import com.focust.api.dto.form.NewUserForm;
 import com.focust.api.model.data.User;
 import com.focust.api.model.repository.UserRepository;
@@ -49,6 +49,7 @@ public class UserController {
     @PutMapping(value="", produces="application/json")
     public ResponseEntity<UserDetails> create(@RequestBody NewUserForm formData) {
 
+        // Don't create a user that already exists...
         Optional<User> existingUser = Optional.ofNullable(userRepository.getByUsername(formData.getUsername()));
         if (existingUser.isPresent()) return new ResponseEntity<>(null, HttpStatus.OK);
 

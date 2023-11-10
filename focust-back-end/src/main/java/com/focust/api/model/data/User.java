@@ -36,7 +36,8 @@ import lombok.AccessLevel;
 public class User {
 
     @Getter @Setter(AccessLevel.PROTECTED)
-    private @Id @GeneratedValue(strategy=GenerationType.AUTO) Long id;
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    private @Column(name="user_id") Long id;
 
     @Getter @Setter
     private @Column(length=24, nullable=false, unique=true) String username;
@@ -45,7 +46,7 @@ public class User {
     private @Column(name="password", nullable=false) String passwordHash;
 
     @Getter @Setter
-    private @Column(length=256, unique=true) String email;
+    private @Column(length=255, unique=true) String email;
 
     public User(NewUserForm formData) {
         this.username = formData.getUsername();

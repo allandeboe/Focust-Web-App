@@ -82,6 +82,7 @@ public final class CRUDController {
 
         }
         catch (Exception e) {
+            System.out.println();
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -101,6 +102,7 @@ public final class CRUDController {
 
         }
         catch (Exception e) {
+            System.out.println();
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -126,6 +128,7 @@ public final class CRUDController {
 
         }
         catch (Exception e) {
+            System.out.println();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -138,10 +141,12 @@ public final class CRUDController {
     public static <R extends Deletable> ResponseEntity<HttpStatus> deleteAll(JpaRepository<R, Long> repository) {
 
         try {
+
             repository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         catch (Exception e) {
+            System.out.println();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -155,6 +160,7 @@ public final class CRUDController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         catch (Exception e) {
+            System.out.println();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

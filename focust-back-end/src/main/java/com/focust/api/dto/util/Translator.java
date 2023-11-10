@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 ///////////////////////////////////////////////////////////
 
 @RequiredArgsConstructor
-public class Translator<V extends View, R> {
+public final class Translator<V extends View, R> {
 
     @NonNull
     private final Class<V> referenceClass;

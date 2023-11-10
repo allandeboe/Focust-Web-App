@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration {
 
     public static PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2B, 12);
     }
 
 }
