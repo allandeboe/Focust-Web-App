@@ -1,0 +1,22 @@
+/** TailwindCSS **/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Main Style **/
+
+@layer base {
+
+  body {
+    @apply bg-gray-900 text-white p-2;
+  }
+
+  hr {
+    @apply border-gray-700 m-2;
+  }
+
+  table {
+    @apply table-auto border-separate w-full text-left;
+  }
+
+}

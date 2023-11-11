@@ -12,11 +12,14 @@
     "@types/react-dom": "^18.2.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+	"build:tailwindcss": "tailwindcss build src/main_tailwind.css -o src/main_style.css",
+	"prestart": "npm run build:tailwindcss",
+	"prebuild": "npm run build:tailwindcss",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -39,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  },
+  "proxy": "http://localhost:8080"
 }

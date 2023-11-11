@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/**
+ * App.tsx
+ * 
+ * This handles the general view of the home-page and
+ * the web application as a whole.
+ * 
+ * @author Allan DeBoe <allan.m.deboe@gmail.com>
+ * @date November 10th, 2023
+ */
+import React, { Component } from 'react';
+import './main_style.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// List of Users on the site...
+import { UserList } from "./components/UserList";
+
+///////////////////////////////////////
+
+export default class App extends Component {
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Users</h1>
+        <hr/>
+        <UserList></UserList>
+      </div>
+    );
+  }
+
 }
-
-export default App;

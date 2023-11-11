@@ -2,9 +2,14 @@
 
 **Focust** is an (currently) on-going flagship project that is meant to demonstrate my skills in *Java*, *JavaScript* (TypeScript), *CSS*, *HTML*, *SQL* and more, especially in the context of web (full stack) development.
 
-Focust has a RESTful, Java-based back end server that handles interactions with the database (I chose *MySQL*) as well as authentication/authorization, and *React.js* front end server written primarily in *TypeScript* (basically, JavaScript with types). 
+When the project gets completed, Focust will allow users to create or join projects, assign themselves (or others, depending on project role) to tasks in a Kanban-styled taskboard to keep track of the progress made on each task, from bug fixes to feature implementations.
 
-Focust allows users to create or join projects, assign themselves (or others, depending on project role) to tasks in a Kanban-styled taskboard to keep track of the progress made on each task, from bug fixes to feature implementations.
+Focust has a RESTful, Java-based back end server that handles interactions with the database (I chose *MySQL*) as well as authentication/authorization, and *React.js* front end server written primarily in *TypeScript* (basically, JavaScript with types) to give the web application its look and feel.
+
+## Why is it called "Focust"?
+Focust is a combination between *focus* and *locusts* - bugs that [are known to form destructive swarms called *locust plagues*](https://www.livescience.com/locusts.html). Since this web app is an *issue tracker* (thus a *bug tracker*), the name is representative of how it allows developers to focus on keeping track of software bugs (or *"focus on locusts"*), as well as progress done on features.
+
+(Or at least what the project will become once completed, as, at the moment) both the front end and back end are rather incomplete, but I'm still working on the project to slowly bring in these features that make an issue tracker an issue tracker).
 
 ## Dependencies
 
@@ -31,6 +36,8 @@ All of these will use the [*Node.js Project Manager*](https://www.npmjs.com/) (`
 * [**TypeScript**](https://www.typescriptlang.org/) - a variant of JavaScript that is *strongly-typed*, which helps in correctness of code, especially inputs where what kind of data that gets put in matters.
 
 * [**React.js**](https://react.dev/) - a commonly used front-end framework made by *Meta* (formerly known as *Facebook*). Used to design the visuals and structure of the website from the user's perspective.
+
+* [**TailwindCSS**](https://tailwindcss.com/) - contains many useful CSS classes that makes it clear what stylings are applied to the JSX/HTML markup, which removes a lot of headaches and improves productivity at least when dealing with stylizing the site.
 
 ### Other
 These are the dependencies that do not fall under the other two categories, and are 
