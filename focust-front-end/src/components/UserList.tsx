@@ -25,7 +25,13 @@ interface BasicUserDetails {
 
 function Loading() {
     return (
-        <p>Loading...</p>
+        <p className="text-center italic">Loading...</p>
+    );
+}
+
+function FailedToDisplayUsers() {
+    return (
+        <p className="text-center italic">Sorry! We weren't able to get the user data.</p>
     );
 }
   
@@ -37,12 +43,19 @@ function BasicUserDisplay(user: BasicUserDetails) {
         </tr>
     );
 }
-  
+
+///////////////////////////////////////
+
 // Gets the list of users
 export class UserList extends Component {
   
+    set: boolean;
+    proxy_failed: boolean;
+
     constructor(props: any) {
         super(props);
+        this.set = false;
+        this.proxy_failed = false;
         this.state = {users: []};
     }
   
@@ -54,17 +67,30 @@ export class UserList extends Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
-        .then(data => this.setState({users: data}))
+        .then((response) => {
+            if (response.status === 500) { 
+                this.proxy_failed = true;
+                return []; 
+            }
+            return response.json();
+        }).then((data) => {
+            if (!this.proxy_failed) {
+                this.set = true;
+                this.setState({users: data});
+            }
+        });
     }
   
     render() {
-  
+
         const {users, isLoading}: any = this.state;
   
-        if (isLoading) { return (<Loading></Loading>); }
+        if (isLoading) { return (<Loading/>); }
         const userList = users.map(BasicUserDisplay);
-  
+
+        // So that the site is still going even if the back-end server is not available...
+        if (!this.set) { return (<FailedToDisplayUsers/>); }
+
         return (
             <table>
                 <thead>

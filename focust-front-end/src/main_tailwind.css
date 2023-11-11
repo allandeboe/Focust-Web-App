@@ -1,22 +1,44 @@
+/** Google Fonts **/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&display=swap');
+
 /** TailwindCSS **/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /** Main Style **/
-
 @layer base {
 
+  html {
+    /** adding "via" doesn't work for some reason when it comes to the background... **/
+    @apply bg-gradient-to-t from-indigo-400 from-10% to-pink-400 to-90% h-full bg-auto bg-no-repeat;
+  }
+
   body {
-    @apply bg-gray-900 text-white p-2;
+    font-family: 'DM Sans', sans-serif;
+    @apply font-light text-base p-2;
+  }
+
+  h1 {
+    @apply font-bold text-2xl;
   }
 
   hr {
-    @apply border-gray-700 m-2;
+    border-color: #404040;
+    @apply m-2;
   }
 
   table {
     @apply table-auto border-separate w-full text-left;
+  }
+
+  th {
+    @apply font-bold;
+  }
+
+  .App {
+    background-color: #101010;
+    @apply m-6 p-4 rounded-md text-white;
   }
 
 }

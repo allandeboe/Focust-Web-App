@@ -17,14 +17,14 @@ import { UserList } from "./components/UserList";
 
 export default class App extends Component {
 
-  render() {
+render() {
     return (
-      <div className="App">
-        <h1>Users</h1>
-        <hr/>
-        <UserList></UserList>
-      </div>
+        <div className="App">
+            <h1>Users</h1>
+            <hr/>
+            <UserList/>
+        </div>
     );
-  }
+    }
 
 }
