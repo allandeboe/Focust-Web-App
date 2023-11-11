@@ -67,7 +67,15 @@ npm install
 This command should install *all* of the dependencies listed in the `package.json` file in the `focust-front-end` directory.
 
 ### Setting Up
-To set up the project, you can run the following command in the terminal, assuming you have it still open in the `focust-front-end` directory from the previous subsection:
+To set up the project, you need to first modify `package.json` file to change the value of `proxy` to the URL of the project: 
+
+```json
+    proxy: "http://localhost:[PORT]"
+```
+
+This is to allow the front-end server make appropriate request to the back-end server. By default, the port number is `8080`, as you might see in the `package.json` file.
+
+After that, you are ready to build the project. To do that, you can run the following command in the terminal, assuming you have it still open in the `focust-front-end` directory from the previous subsection:
 
 ```
 npm run build
