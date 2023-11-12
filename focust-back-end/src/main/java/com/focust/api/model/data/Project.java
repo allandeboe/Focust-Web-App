@@ -13,6 +13,7 @@ package com.focust.api.model.data;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.focust.api.model.relational.ProjectMembership;
 
 /** JPA / Hibernate **/
@@ -29,12 +30,14 @@ import jakarta.persistence.GenerationType;
 
 /** Lombok **/
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import lombok.AccessLevel;
+import org.antlr.v4.runtime.misc.NotNull;
 
 /** Standard Java / JDBC **/
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 ///////////////////////////////////////////////////////////
@@ -54,7 +57,7 @@ public class Project {
 
     @Getter @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    private @Column(name="created_on", updatable = false) Date creation_date;
+    private @Column(name="created_on", updatable = false) ZonedDateTime creation_date;
 
     @Getter @Setter
     @OneToMany(mappedBy="project")

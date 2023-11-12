@@ -35,8 +35,8 @@ import lombok.Setter;
 
 import lombok.AccessLevel;
 
-/** Standard JDBC **/
-import java.util.Date;
+/** Standard Java / JDBC **/
+import java.time.ZonedDateTime;
 import java.util.List;
 
 ///////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ public class User {
 
     @Getter @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    private @Column(name="joined_on", updatable = false) Date joinDate;
+    private @Column(name="joined_on", updatable = false) ZonedDateTime joinDate;
 
     @Getter @Setter
     @OneToMany(mappedBy="user")
@@ -81,6 +81,7 @@ public class User {
         this.username = formData.getUsername();
         this.passwordHash = SecurityConfiguration.getEncoder().encode(formData.getPassword());
         this.email = formData.getEmail();
+        this.joinDate = ZonedDateTime.now();
     }
 
 }

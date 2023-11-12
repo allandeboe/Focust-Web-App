@@ -25,16 +25,16 @@ interface BasicUserDetails {
 
 function Loading() {
     return (
-        <p className="text-center italic">Loading...</p>
+        <p className="italic">Loading...</p>
     );
 }
 
-function FailedToDisplayUsers() {
+function NoUsersDisplay() {
     return (
-        <p className="text-center italic">Sorry! We weren't able to get the user data.</p>
+        <p className="italic">No user data found.</p>
     );
 }
-  
+
 function BasicUserDisplay(user: BasicUserDetails) {
     return (
         <tr key={user.id}>
@@ -72,6 +72,9 @@ export class UserList extends Component {
                 this.proxy_failed = true;
                 return []; 
             }
+            if (response.status === 204) {
+                return [];
+            }
             return response.json();
         }).then((data) => {
             if (!this.proxy_failed) {
@@ -86,10 +89,10 @@ export class UserList extends Component {
         const {users, isLoading}: any = this.state;
   
         if (isLoading) { return (<Loading/>); }
-        const userList = users.map(BasicUserDisplay);
+        if (!this.set) { return (<NoUsersDisplay/>); }
+        if (users.length < 1) { return (<NoUsersDisplay/>); }
 
-        // So that the site is still going even if the back-end server is not available...
-        if (!this.set) { return (<FailedToDisplayUsers/>); }
+        const userList = users.map(BasicUserDisplay);
 
         return (
             <table>

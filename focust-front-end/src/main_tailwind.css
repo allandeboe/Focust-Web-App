@@ -11,21 +11,23 @@
 
   html {
     /** adding "via" doesn't work for some reason when it comes to the background... **/
-    @apply bg-gradient-to-t from-indigo-400 from-10% to-pink-400 to-90% h-full bg-auto bg-no-repeat;
+    @apply bg-gradient-to-t from-purple-500 from-10% to-pink-300 to-90% h-full bg-auto bg-no-repeat;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    @apply font-light text-base p-2;
+    @apply h-full font-light text-base p-2 bg-gradient-to-tl from-transparent from-20% to-blue-400;
   }
 
+  /** Body Elements **/
+
   h1 {
-    @apply font-bold text-2xl;
+    @apply font-bold text-5xl tracking-tight leading-tight;
   }
 
   hr {
     border-color: #404040;
-    @apply m-2;
+    @apply mb-2;
   }
 
   table {
@@ -36,9 +38,30 @@
     @apply font-bold;
   }
 
-  .App {
+  p {
+    @apply py-2;
+  }
+
+  /** Hyperlinks **/
+
+  a {
+    transition: color 0.75s;
+    @apply no-underline text-purple-300;
+  }
+
+  a:hover {
+    @apply text-pink-300;
+  }
+
+  p a {
+    @apply italic;
+  }
+
+  /** Custom Classes **/
+
+  .main {
     background-color: #101010;
-    @apply m-6 p-4 rounded-md text-white;
+    @apply m-6 p-4 rounded-lg text-white;
   }
 
 }

@@ -8,10 +8,9 @@
  * @date November 10th, 2023
  */
 import React, { Component } from 'react';
-import './main_style.css';
+import './main_style.css'; // Compiled version of './main_tailwind.css'
 
-// List of Users on the site...
-import { UserList } from "./components/UserList";
+import Main from './Main';
 
 ///////////////////////////////////////
 
@@ -19,12 +18,9 @@ export default class App extends Component {
 
 render() {
     return (
-        <div className="App">
-            <h1>Users</h1>
-            <hr/>
-            <UserList/>
+        <div className="main">
+            <Main/>
         </div>
     );
     }
-
 }
