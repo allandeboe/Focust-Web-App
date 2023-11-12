@@ -16,7 +16,7 @@ package com.focust.api.controller;
 
 /** Focust **/
 import com.focust.api.controller.util.CRUDController;
-import com.focust.api.dto.view.UserDetails;
+import com.focust.api.dto.view.BasicUserDetails;
 import com.focust.api.dto.form.NewUserForm;
 import com.focust.api.model.data.User;
 import com.focust.api.model.repository.UserRepository;
@@ -47,23 +47,23 @@ public class UserController {
     UserRepository userRepository;
 
     @PutMapping(value="", produces="application/json")
-    public ResponseEntity<UserDetails> create(@RequestBody NewUserForm formData) {
+    public ResponseEntity<BasicUserDetails> create(@RequestBody NewUserForm formData) {
 
         // Don't create a user that already exists...
         Optional<User> existingUser = Optional.ofNullable(userRepository.getByUsername(formData.getUsername()));
         if (existingUser.isPresent()) return new ResponseEntity<>(null, HttpStatus.OK);
 
-        return CRUDController.create(userRepository, formData, UserDetails.class);
+        return CRUDController.create(userRepository, formData, BasicUserDetails.class);
     }
 
     @GetMapping(value="/{id}", produces="application/json")
-    public ResponseEntity<UserDetails> getById(@PathVariable long id) {
-        return CRUDController.getById(userRepository, id, UserDetails.class);
+    public ResponseEntity<BasicUserDetails> getById(@PathVariable long id) {
+        return CRUDController.getById(userRepository, id, BasicUserDetails.class);
     }
 
     @GetMapping(value="", produces="application/json")
-    public ResponseEntity<List<UserDetails>> getAll() {
-        return CRUDController.getAll(userRepository, UserDetails.class);
+    public ResponseEntity<List<BasicUserDetails>> getAll() {
+        return CRUDController.getAll(userRepository, BasicUserDetails.class);
     }
 
 }

@@ -12,18 +12,30 @@ package com.focust.api.model.data;
 
 ///////////////////////////////////////////////////////////
 
+/** Focust **/
+import com.focust.api.model.relational.ProjectMembership;
+
 /** JPA / Hibernate **/
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.GenerationType;
 
 /** Lombok **/
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+
+import lombok.AccessLevel;
+
+/** Standard Java / JDBC **/
+import java.util.Date;
+import java.util.List;
 
 ///////////////////////////////////////////////////////////
 
@@ -40,6 +52,12 @@ public class Project {
     @Getter @Setter
     private @Column(length=255) String description;
 
+    @Getter @Setter
+    @Temporal(TemporalType.TIMESTAMP)
+    private @Column(name="created_on", updatable = false) Date creation_date;
 
+    @Getter @Setter
+    @OneToMany(mappedBy="project")
+    private List<ProjectMembership> members;
 
 }

@@ -22,7 +22,7 @@ import lombok.NonNull;
 
 ///////////////////////////////////////////////////////////
 
-public class UserDetails implements View {
+public class BasicUserDetails implements View {
 
     @Getter
     private Long id;
@@ -36,7 +36,7 @@ public class UserDetails implements View {
     @Getter
     private String github;
 
-    public UserDetails(@NonNull User user) {
+    public BasicUserDetails(@NonNull User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();

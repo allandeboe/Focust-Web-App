@@ -68,7 +68,7 @@ export class UserList extends Component {
             }
         })
         .then((response) => {
-            if (response.status === 500) { 
+            if (response.status >= 300) { 
                 this.proxy_failed = true;
                 return []; 
             }
