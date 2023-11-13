@@ -1,19 +1,23 @@
 /**
- * UserDetails
+ * BasicUserDetails
  *
- * This class is a data transfer object (DTO) used to send basic
- * information about the user without revealing sensitive user
- * information (like password hashes).
+ * This class is one of the few classes that is used to
+ * return user data back to the client/front-end.
+ *
+ * Since sending sensitive information, like password hashes,
+ * back to the client is a recipe for a data breach, this
+ * Response DTO only returns non-sensitive user information
+ * about the user.
  *
  * @author Allan DeBoe (allan.m.deboe@gmail.com)
  * @date November 6th, 2023
  */
-package com.focust.api.dto.view;
+package com.focust.api.dto.response;
 
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
-import com.focust.api.dto.util.View;
+import com.focust.api.dto.util.Response;
 import com.focust.api.model.data.User;
 
 /** Lombok **/
@@ -22,7 +26,7 @@ import lombok.NonNull;
 
 ///////////////////////////////////////////////////////////
 
-public class BasicUserDetails implements View {
+public class BasicUserDetails implements Response {
 
     @Getter
     private Long id;

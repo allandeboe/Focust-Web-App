@@ -1,5 +1,5 @@
 /**
- * NewUserForm
+ * NewUserRequest
  *
  * This class is a data transfer object (DTO) that is sent to
  * the back-end server containing details needed to add a new
@@ -10,12 +10,12 @@
  * @author Allan DeBoe (allan.m.deboe@gmail.com)
  * @date November 6th, 2023
  */
-package com.focust.api.dto.form;
+package com.focust.api.dto.request;
 
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
-import com.focust.api.dto.util.Form;
+import com.focust.api.dto.util.Request;
 import com.focust.api.model.data.User;
 
 /** Lombok **/
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 ///////////////////////////////////////////////////////////
 
 @RequiredArgsConstructor
-public class NewUserForm implements Form<User> {
+public class NewUserRequest implements Request<User> {
 
     @Getter @NonNull
     private final String username;

@@ -11,12 +11,12 @@
 
   html {
     /** adding "via" doesn't work for some reason when it comes to the background... **/
-    @apply bg-gradient-to-t from-purple-500 from-10% to-pink-300 to-90% h-full bg-auto bg-no-repeat;
+    @apply bg-gradient-to-t from-purple-500 from-10% to-pink-500 to-90% h-full bg-auto bg-no-repeat;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    @apply h-full font-light text-base p-2 bg-gradient-to-tl from-transparent from-20% to-blue-400;
+    @apply h-full font-light text-base p-2 bg-gradient-to-tl from-transparent from-20% to-blue-500;
   }
 
   /** Body Elements **/

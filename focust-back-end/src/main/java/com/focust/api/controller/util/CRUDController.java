@@ -7,12 +7,15 @@
  * implementations of the CRUD functionality, which is great when it comes to
  * maintainability as well as ensuring appropriate responses when CRUD is used.
  *
- * "R" refers to the repository/received data, which is any class that has a
+ * "T" refers to the table/repository data, which is any class that has a
  * corresponding JpaRepository sub-interface made for it.
  * @see com.focust.api.model.data
  *
- * "T" refers to the transfer data, usually data transfer objects (DTOs) that
+ * "R" refers to the response data, usually data transfer objects (DTOs) that
  * are used to send information back to the client/front-end.
+ *
+ * "F" refers to the request/form data, usually data transfer objects (DTOs)
+ * that the back-end server receives from the client/front-end
  *
  * @author Allan DeBoe (allan.m.deboe@gmail.com)
  * @date November 6th, 2023
@@ -22,9 +25,9 @@ package com.focust.api.controller.util;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
-import com.focust.api.dto.util.Form;
-import com.focust.api.dto.util.Translator;
-import com.focust.api.dto.util.View;
+import com.focust.api.dto.util.Request;
+import com.focust.api.dto.util.ResponseCreator;
+import com.focust.api.dto.util.Response;
 
 /** Standard Java **/
 import java.util.ArrayList;
@@ -44,12 +47,12 @@ public final class CRUDController {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CREATE
 
-    public static <R, V extends View, C extends Form<R>> ResponseEntity<V> create(JpaRepository<R, Long> repository, C newData, Class<V> resultClass) {
+    public static <T, R extends Response, F extends Request<T>> ResponseEntity<R> create(JpaRepository<T, Long> repository, F newData, Class<R> resultClass) {
 
         try {
-            R newEntry = repository.save(newData.unload());
-            Translator<V, R> translator = new Translator<>(resultClass);
-            return new ResponseEntity<>(translator.translate(newEntry), HttpStatus.CREATED);
+            T newEntry = repository.save(newData.unload());
+            ResponseCreator<R, T> translator = new ResponseCreator<>(resultClass);
+            return new ResponseEntity<>(translator.createResponse(newEntry), HttpStatus.CREATED);
         }
         catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -65,16 +68,16 @@ public final class CRUDController {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // READ
 
-    public static <R, V extends View> ResponseEntity<List<V>> getAll(JpaRepository<R, Long> repository, Class<V> resultClass) {
+    public static <T, R extends Response> ResponseEntity<List<R>> getAll(JpaRepository<T, Long> repository, Class<R> resultClass) {
 
         try {
             /* add a corresponding DTO (i.e. "T") for every entry (i.e. "R") to ensure that
              * no sensitive/unwanted data gets sent over.
              */
-            List<V> entries = new ArrayList<V>();
-            Translator<V, R> translator = new Translator<>(resultClass);
-            for (R entry: repository.findAll()) {
-                entries.add(translator.translate(entry));
+            List<R> entries = new ArrayList<R>();
+            ResponseCreator<R, T> translator = new ResponseCreator<>(resultClass);
+            for (T entry: repository.findAll()) {
+                entries.add(translator.createResponse(entry));
             }
 
             if (entries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
@@ -89,14 +92,14 @@ public final class CRUDController {
 
     }
 
-    public static <R, V extends View> ResponseEntity<V> getById(JpaRepository<R, Long> repository, long id, Class<V> resultClass) {
+    public static <T, R extends Response> ResponseEntity<R> getById(JpaRepository<T, Long> repository, long id, Class<R> resultClass) {
 
         try {
-            Optional<R> entry = repository.findById(id);
+            Optional<T> entry = repository.findById(id);
 
             if (entry.isPresent()) {
-                Translator<V, R> translator = new Translator<>(resultClass);
-                return new ResponseEntity<>(translator.translate(entry.get()), HttpStatus.OK);
+                ResponseCreator<R, T> translator = new ResponseCreator<>(resultClass);
+                return new ResponseEntity<>(translator.createResponse(entry.get()), HttpStatus.OK);
             }
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
@@ -112,13 +115,13 @@ public final class CRUDController {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // UPDATE
 
-    public static <C, R extends Updatable<C>> ResponseEntity<HttpStatus> updateById(JpaRepository<R, Long> repository, long id, C newData) {
+    public static <F, T extends Updatable<F>> ResponseEntity<HttpStatus> updateById(JpaRepository<T, Long> repository, long id, F newData) {
 
         try {
-            Optional<R> entry = repository.findById(id);
+            Optional<T> entry = repository.findById(id);
 
             if (entry.isPresent()) {
-                R model = entry.get();
+                T model = entry.get();
                 model.update(newData);
                 repository.save(model);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -138,7 +141,7 @@ public final class CRUDController {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Delete
 
-    public static <R extends Deletable> ResponseEntity<HttpStatus> deleteAll(JpaRepository<R, Long> repository) {
+    public static <T extends Deletable> ResponseEntity<HttpStatus> deleteAll(JpaRepository<T, Long> repository) {
 
         try {
 
@@ -153,7 +156,7 @@ public final class CRUDController {
 
     }
 
-    public static <R extends Deletable> ResponseEntity<HttpStatus> deleteById(JpaRepository<R, Long> repository, long id) {
+    public static <T extends Deletable> ResponseEntity<HttpStatus> deleteById(JpaRepository<T, Long> repository, long id) {
 
         try {
             repository.deleteById(id);

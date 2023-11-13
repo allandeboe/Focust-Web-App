@@ -1,5 +1,5 @@
 /**
- * Form
+ * Request
  *
  * This class is used for any data transfer object (DTO) corresponding
  * to the data that the server receives from the client/front-end.
@@ -11,8 +11,8 @@ package com.focust.api.dto.util;
 
 ///////////////////////////////////////////////////////////
 
-public interface Form<R> {
+public interface Request<T> {
 
-    public R unload();
+    public T unload();
 
 }

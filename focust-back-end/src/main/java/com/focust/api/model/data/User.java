@@ -12,7 +12,7 @@ package com.focust.api.model.data;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
-import com.focust.api.dto.form.NewUserForm;
+import com.focust.api.dto.request.NewUserRequest;
 import com.focust.api.model.relational.ProjectMembership;
 import com.focust.api.security.SecurityConfiguration;
 
@@ -77,7 +77,7 @@ public class User {
     @OneToMany(mappedBy="user")
     private List<ProjectMembership> projects;
 
-    public User(NewUserForm formData) {
+    public User(NewUserRequest formData) {
         this.username = formData.getUsername();
         this.passwordHash = SecurityConfiguration.getEncoder().encode(formData.getPassword());
         this.email = formData.getEmail();
