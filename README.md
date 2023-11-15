@@ -1,15 +1,12 @@
 # Focust - Issue Tracker Web Application
+Focust is an issue tracker made using *Java Spring*, *MySQL*, *React.js*, *TypeScript*, and *TailwindCSS*. 
 
-**Focust** is an (currently) on-going flagship project that is meant to demonstrate my skills in *Java*, *JavaScript* (TypeScript), *CSS*, *HTML*, *SQL* and more, especially in the context of web (full stack) development.
+Currently, the back-end server is able to handle user creation and stores passwords via bcrypt into the database, and able to return information about users without leaking their sensitive information. Later, the project will support authentication tokens and authorization to prevent third-parties from modifying the database as well as allow certain permissions for site admins and project owners to modify the database contents, plus other details. 
 
-When the project gets completed, Focust will allow users to create or join projects, assign themselves (or others, depending on project role) to tasks in a Kanban-styled taskboard to keep track of the progress made on each task, from bug fixes to feature implementations.
-
-Focust has a RESTful, Java-based back end server that handles interactions with the database (I chose *MySQL*) as well as authentication/authorization, and *React.js* front end server written primarily in *TypeScript* (basically, JavaScript with types) to give the web application its look and feel.
+The front-end currently has page transitions, a gradient background, a navigation bar, and a "users" page that will display all of the users stored in the database, if the back-end is running. Later, there will be user pages that will go more in-depth about a user (again, without revealing sensitive information), project pages, the ability to view and interact with a Kanban-styled taskboard to keep track of the progres made on tasks and user stories, plus other details.
 
 ## Why is it called "Focust"?
-Focust is a combination between *focus* and *locusts* - bugs that [are known to form destructive swarms called *locust plagues*](https://www.livescience.com/locusts.html). Since this web app is an *issue tracker* (thus a *bug tracker*), the name is representative of how it allows developers to focus on keeping track of software bugs (or *"focus on locusts"*), as well as progress done on features.
-
-(Or at least what the project will become once completed, as, at the moment) both the front end and back end are rather incomplete, but I'm still working on the project to slowly bring in these features that make an issue tracker an issue tracker).
+Focust is a combination between *focus* and *locusts* - bugs that [are known to form destructive swarms called *locust plagues*](https://www.livescience.com/locusts.html). Since this web app is an *issue tracker* (thus a *bug tracker*), the name is representative of how it allows developers to focus on keeping track of software bugs (or *"focus on locusts"*), as well as progress done on feature implementations.
 
 ## Dependencies
 

@@ -17,12 +17,12 @@ import { Navigation } from './components/Navigation';
 
 export default class App extends Component {
 
-render() {
-    return (
-        <div>
-            <Navigation/>
-            <Main/>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <Navigation/>
+                <Main/>
+            </div>
+        );
     }
 }

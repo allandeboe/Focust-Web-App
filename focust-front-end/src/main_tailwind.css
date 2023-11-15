@@ -111,12 +111,12 @@
   /** Page Transitions **/
 
   .fade-in {
-    animation: 0.5s fade-in forwards;
+    animation: 0.25s fade-in forwards;
     @apply ease-in;
   }
 
   .fade-out {
-    animation: 0.5s fade-out forwards;
+    animation: 0.25s fade-out forwards;
     @apply ease-out;
   }
 

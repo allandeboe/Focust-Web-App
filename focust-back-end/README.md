@@ -19,7 +19,7 @@ The following REST commands handles interacting with the `users` table in the da
     * `"email"` - the user's email address for the site.
     * `"github"`- the user's github username. If the user has not given the site said username, then the value would be `null`.
 
-* `PUT http://localhost:[PORT]/users/` adds a new user to the site. You must send over some `JSON` that contains the following:
+* `POST http://localhost:[PORT]/users/` adds a new user to the site. You must send over some `JSON` that contains the following:
     * `"username"` - the user's username for the site.
     * `"password"` - the plaintext password for the user. This data gets encrypted when received and stored by the server via `bcrypt`. The reason is that the server assumes that HTTPS is used, although in reality HTTP is used as getting HTTPS would require purchasing a TLS/SSL Certificate, which costs money. This means that, at the projects current state, one can use a packet sniffer like *WireShark* to sniff out packets for a new user creating an account and get the password for the poor new user that way.
     * `"email"` - the user's email address for the site.

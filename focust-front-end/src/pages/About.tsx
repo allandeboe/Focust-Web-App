@@ -7,6 +7,7 @@
  * @date November 14th, 2023
  */
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class About extends Component {
 
@@ -19,7 +20,7 @@ export default class About extends Component {
                 <div className="dark-segment max-w-50">
                     <h2>Allan DeBoe</h2>
                     <p>
-                    Allan is a Software Engineering graduate from <a href="https://www.asu.edu">Arizona State University</a> and is the sole creator and developer of Focust, which he made in an attempt
+                    Allan is a Software Engineering graduate from <Link to="https://www.asu.edu">Arizona State University</Link> and is the sole creator and developer of Focust, which he made in an attempt
                     to help him get an entry-level position and start a career.
                     </p>
                     <p>
@@ -29,7 +30,7 @@ export default class About extends Component {
                     </p>
                     <p>
                     So, to make himself stand out and to increase his chances of getting his foot in the door, he decided to work on a <i>massive flagship project</i> when everyone else is making 
-                    toy projects like calculators or games; he worked on making an <b>issue tracker web application</b> - <b><a href="/">Focust</a></b>.
+                    toy projects like calculators or games; he worked on making an <b>issue tracker web application</b> - <b><Link to="/">Focust</Link></b>.
                     </p>
                 </div>
             </div>
