@@ -11,7 +11,7 @@
 
   html {
     /** adding "via" doesn't work for some reason when it comes to the background... **/
-    @apply bg-gradient-to-t from-purple-500 from-10% to-pink-500 to-90% h-full bg-auto bg-no-repeat;
+    @apply overflow-hidden bg-gradient-to-t from-purple-500 from-10% to-pink-500 to-90% h-full bg-auto bg-no-repeat;
   }
 
   body {
@@ -21,8 +21,8 @@
 
   /** Body Elements **/
 
-  h1 {
-    @apply font-bold text-5xl tracking-tight leading-tight;
+  h1, h2 {
+    @apply font-bold text-6xl tracking-tighter leading-none;
   }
 
   hr {
@@ -42,26 +42,100 @@
     @apply py-2;
   }
 
-  /** Hyperlinks **/
+  /** Hyperlinks (Main) **/
 
-  a {
+  .main a {
     transition: color 0.75s;
     @apply no-underline text-purple-300;
   }
 
-  a:hover {
+  .main a:hover {
     @apply text-pink-300;
   }
 
-  p a {
+  .main p a {
     @apply italic;
+  }
+
+  .main p b a {
+    font-style: normal;
+    @apply font-bold;
+  }
+
+  /** Bold / Italic (Main) **/
+
+  .main b {
+    @apply font-bold;
+  }
+
+  .main i {
+    @apply italic;
+  }
+
+  /** Hyperlinks (Navigation) **/
+
+  .navigation {
+    @apply bg-transparent p-4 text-center;
+  }
+
+  .navigation a {
+    transition: background-color 0.75s;
+    @apply text-center text-lg text-white font-bold p-3 m-1 rounded-lg;
+  }
+
+  .navigation a:hover {
+    @apply bg-black;
   }
 
   /** Custom Classes **/
 
-  .main {
+  .max-w-50 {
+    max-width: 50%;
+  }
+
+  .max-w-30 {
+    max-width: 30%;
+  }
+
+  .segment {
+    padding-right: min(16px, 15%);
+    padding-left: min(16px, 15%);
+    @apply m-6 py-4 text-white;
+  }
+
+  .dark-segment {
     background-color: #101010;
-    @apply m-6 p-4 rounded-lg text-white;
+    @apply segment rounded-lg;
+  }
+
+  /** Page Transitions **/
+
+  .fade-in {
+    animation: 0.5s fade-in forwards;
+    @apply ease-in;
+  }
+
+  .fade-out {
+    animation: 0.5s fade-out forwards;
+    @apply ease-out;
+  }
+
+  @keyframes fade-out {
+    from {
+      @apply opacity-100 blur-none;
+    }
+    to {
+      @apply opacity-0 blur-sm;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      @apply opacity-0 blur-sm;
+    }
+    to {
+      @apply opacity-100 blur-none;
+    }
   }
 
 }

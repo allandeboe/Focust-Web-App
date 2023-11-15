@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import './main_style.css'; // Compiled version of './main_tailwind.css'
 
 import Main from './Main';
+import { Navigation } from './components/Navigation';
 
 ///////////////////////////////////////
 
@@ -18,7 +19,8 @@ export default class App extends Component {
 
 render() {
     return (
-        <div className="main">
+        <div>
+            <Navigation/>
             <Main/>
         </div>
     );

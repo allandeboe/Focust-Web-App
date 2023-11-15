@@ -1,5 +1,5 @@
 /**
- * userList.tsx
+ * UserList.tsx
  * 
  * This handles the list of users on the site. This
  * will only work once the back-end is active.

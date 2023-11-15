@@ -12,7 +12,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="text-center">
+            <div className="dark-segment text-center">
                 <h1>Page not found or doesn't exist</h1>
                 <p>
                 To go back to the main page, <a href="/">click here!</a>
