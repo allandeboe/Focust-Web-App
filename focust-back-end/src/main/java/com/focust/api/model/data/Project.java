@@ -13,6 +13,7 @@ package com.focust.api.model.data;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
+import com.focust.api.dto.request.NewProjectRequest;
 import com.focust.api.model.relational.ProjectMembership;
 
 /** JPA / Hibernate **/
@@ -59,5 +60,10 @@ public class Project {
     @Getter @Setter
     @OneToMany(mappedBy="project")
     private List<ProjectMembership> members;
+
+    public Project(NewProjectRequest formData) {
+        this.name = formData.getName();
+        this.description = formData.getDescription();
+    }
 
 }

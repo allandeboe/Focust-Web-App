@@ -36,6 +36,10 @@ import java.util.Optional;
 
 /** Spring Framework **/
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,16 +75,24 @@ public final class CRUDController {
     public static <T, R extends Response> ResponseEntity<List<R>> getAll(JpaRepository<T, Long> repository, Class<R> resultClass) {
 
         try {
+
+            /* This should allow pagination, as the number of potential items might be very, very large
+             * and thus sending the entire list would actually be a nonsensical idea.
+             * (Yay for the fact that JpaRepository extends PagingAndSortingRepository.
+             */
+            Pageable firstPage = PageRequest.of(1, 15);
+            Page<T> allEntries = repository.findAll(firstPage);
+            if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
+
             /* add a corresponding DTO (i.e. "T") for every entry (i.e. "R") to ensure that
              * no sensitive/unwanted data gets sent over.
              */
-            List<R> entries = new ArrayList<R>();
+            List<R> entries = new ArrayList<>();
             ResponseCreator<R, T> translator = new ResponseCreator<>(resultClass);
-            for (T entry: repository.findAll()) {
+            for (T entry: allEntries) {
                 entries.add(translator.createResponse(entry));
             }
 
-            if (entries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
             return new ResponseEntity<>(entries, HttpStatus.OK);
 
         }
