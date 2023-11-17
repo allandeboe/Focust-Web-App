@@ -18,8 +18,8 @@ export default class Home extends Component {
                 <div className="segment text-center">
                     <h1>Focust</h1>
                 </div>
-                <div className="items-start justify-evenly flex-wrap">
-                    <div className="dark-segment max-w-30">
+                <div className="container">
+                    <div className="dark-segment">
                         <h1>An <Link to="https://www.atlassian.com/software/jira">issue tracker web app</Link> of all time!</h1>
                         <p>
                         Focust is an issue tracker web app that is made 
@@ -29,6 +29,10 @@ export default class Home extends Component {
                         , <Link to="https://spring.io/">Java Spring</Link>
                         , and <Link to="https://www.mysql.com/">MySQL</Link>.
                         </p>
+                    </div>
+                    <div className="dark-segment">
+                        <h1>Lorem Ipsum</h1>
+                        <p>  </p>
                     </div>
                 </div>
             </div>

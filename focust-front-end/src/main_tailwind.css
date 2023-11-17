@@ -11,12 +11,16 @@
 
   html {
     /** adding "via" doesn't work for some reason when it comes to the background... **/
-    @apply overflow-hidden bg-gradient-to-t from-purple-500 from-10% to-pink-500 to-90% h-full bg-auto bg-no-repeat;
+    @apply overflow-hidden;
+    @apply bg-gradient-to-t from-purple-500 from-10% to-pink-500 to-90%;
+    @apply h-full bg-auto bg-no-repeat;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    @apply h-full font-light text-base p-2 bg-gradient-to-tl from-transparent from-20% to-blue-500;
+    @apply h-full w-full p-2;
+    @apply font-light text-base;
+    @apply bg-gradient-to-tl from-transparent from-20% to-blue-500;
   }
 
   /** Body Elements **/
@@ -76,31 +80,35 @@
 
   nav a {
     transition: background-color 0.75s;
-    @apply text-center text-lg text-white font-bold p-3 m-1 rounded-lg;
+    @apply text-center text-lg text-white font-bold tracking-tight;
+    @apply p-3 m-1 rounded-lg;
   }
 
   nav a:hover {
-    @apply bg-black;
+    background-color: #101010;
   }
 
   /** Custom Classes **/
 
-  .max-w-50 {
-    max-width: 50%;
-  }
-
-  .max-w-30 {
-    max-width: 30%;
-  }
-
   .segment {
-    padding-right: min(16px, 15%);
-    padding-left: min(16px, 15%);
-    @apply m-6 py-4 text-white;
+    @apply m-4 p-4 text-white;
   }
 
-  .dark-segment {
+  .container {
+    @apply flex flex-wrap;
+
+    /**
+     * This fixes the problem of the container width not expanding to the entire possible width,
+     * making any grid elements awkwardly placed. This is due to the @media (min-width ...) tags
+     * in the generated "main_style.css" file, which set max-widths to certain px widths depending
+     * on the given min-width.
+     */
+    @apply min-w-full;
+  }
+
+  .container > div {
     background-color: #101010;
+    @apply grow basis-96;
     @apply segment rounded-lg;
   }
 

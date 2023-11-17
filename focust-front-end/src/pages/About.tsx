@@ -17,8 +17,8 @@ export default class About extends Component {
                 <div className="segment text-center">
                     <h1>About Us</h1>
                 </div>
-                <div className="items-start justify-evenly flex-wrap">
-                    <div className="dark-segment max-w-50">
+                <div className="container">
+                    <div className="dark-segment">
                         <h2>Allan DeBoe</h2>
                         <p>
                         Allan is a Software Engineering graduate from <Link to="https://www.asu.edu">Arizona State University</Link> and is the sole creator and developer of Focust, which he made in an attempt
