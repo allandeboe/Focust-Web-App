@@ -15,7 +15,7 @@ export class Navigation extends Component {
 
     render() {
         return (
-            <nav className="navigation">
+            <nav className="bg-transparent p-4 text-center">
                 <Link to="/">Home</Link>
                 <Link to="/about-us">About Us</Link>
             </nav>

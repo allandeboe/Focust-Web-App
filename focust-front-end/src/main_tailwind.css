@@ -64,26 +64,22 @@
 
   /** Bold / Italic (Main) **/
 
-  .main b {
+  b {
     @apply font-bold;
   }
 
-  .main i {
+  i {
     @apply italic;
   }
 
   /** Hyperlinks (Navigation) **/
 
-  .navigation {
-    @apply bg-transparent p-4 text-center;
-  }
-
-  .navigation a {
+  nav a {
     transition: background-color 0.75s;
     @apply text-center text-lg text-white font-bold p-3 m-1 rounded-lg;
   }
 
-  .navigation a:hover {
+  nav a:hover {
     @apply bg-black;
   }
 
@@ -122,20 +118,32 @@
 
   @keyframes fade-out {
     from {
-      @apply opacity-100 blur-none;
+      @apply in;
     }
     to {
-      @apply opacity-0 blur-sm;
+      @apply out;
     }
   }
 
   @keyframes fade-in {
     from {
-      @apply opacity-0 blur-sm;
+      @apply out;
     }
     to {
-      @apply opacity-100 blur-none;
+      @apply in;
     }
+  }
+
+  /** Done to make changes to the page transitions much easier to pull off **/
+
+  .in {
+    transform: translate(0rem, 0rem);
+    @apply opacity-100 blur-none;
+  }
+
+  .out {
+    transform: translate(0rem, -1rem);
+    @apply opacity-0 blur-sm;
   }
 
 }

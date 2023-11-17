@@ -53,6 +53,8 @@ mvnw clean
 mvnw spring-boot:run
 ```
 
+Or you can run the provided `run.bat`, which will essentially do the same thing but in one go.
+
 Then, you can use something like *CURL* or *Postman* to interact with this server. Read the `README.md` file in the `focust-back-end` directory to see what commands you can write to the server. 
 
 ## Front-end Server (React)

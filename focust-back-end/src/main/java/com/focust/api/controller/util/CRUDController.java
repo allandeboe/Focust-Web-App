@@ -80,7 +80,7 @@ public final class CRUDController {
              * and thus sending the entire list would actually be a nonsensical idea.
              * (Yay for the fact that JpaRepository extends PagingAndSortingRepository.
              */
-            Pageable firstPage = PageRequest.of(1, 15);
+            Pageable firstPage = PageRequest.of(0, 15);
             Page<T> allEntries = repository.findAll(firstPage);
             if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
 
