@@ -38,6 +38,11 @@ public class NewProjectRequest implements Request<Project> {
     private final Long creatorId;
 
     @Override
-    public Project unload() { return new Project(this); }
+    public Project unload() {
+        Project project = new Project();
+        project.setName(this.name);
+        project.setDescription(this.description);
+        return project;
+    }
 
 }

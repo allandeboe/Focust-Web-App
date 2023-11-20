@@ -24,13 +24,18 @@ package com.focust.api.model.repository;
 import com.focust.api.model.data.Project;
 
 /** Spring Framework **/
-import org.springframework.stereotype.Repository;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 ///////////////////////////////////////////////////////////
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
+
+    @Query("SELECT p FROM Project p WHERE p.name = :project_name")
+    Project getByProjectName(@Param("project_name") String name);
 
 }

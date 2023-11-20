@@ -39,7 +39,11 @@ public class NewUserRequest implements Request<User> {
 
     @Override
     public User unload() {
-        return new User(this);
+        User user = new User();
+        user.setUsername(this.username);
+        user.setPassword(this.password);
+        user.setEmail(this.email);
+        return user;
     }
 
 }

@@ -6,6 +6,7 @@
  * table in the database.
  *
  * @see com.focust.api.model.data.User
+ * @see com.focust.api.model.relational.ProjectMembership
  *
  * @author Allan DeBoe (allan.m.deboe@gmail.com)
  * @date November 6th, 2023
@@ -18,14 +19,21 @@ package com.focust.api.controller;
 import com.focust.api.controller.util.CRUDController;
 import com.focust.api.dto.response.BasicUserDetails;
 import com.focust.api.dto.request.NewUserRequest;
+import com.focust.api.dto.util.ResponseCreator;
+import com.focust.api.model.data.Project;
 import com.focust.api.model.data.User;
+import com.focust.api.model.relational.ProjectMembership;
 import com.focust.api.model.repository.UserRepository;
 
 /** Standard Java **/
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /** Spring Framework **/
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -46,6 +54,8 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    ///////////////////////////////////////////////////////
+
     @PostMapping(value="", produces="application/json")
     public ResponseEntity<BasicUserDetails> create(@RequestBody NewUserRequest formData) {
 
@@ -65,5 +75,7 @@ public class UserController {
     public ResponseEntity<List<BasicUserDetails>> getAll() {
         return CRUDController.getAll(userRepository, BasicUserDetails.class);
     }
+
+    ///////////////////////////////////////////////////////
 
 }

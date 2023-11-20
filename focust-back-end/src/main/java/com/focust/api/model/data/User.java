@@ -13,6 +13,7 @@ package com.focust.api.model.data;
 
 /** Focust **/
 import com.focust.api.dto.request.NewUserRequest;
+import com.focust.api.enums.ProjectRole;
 import com.focust.api.model.relational.ProjectMembership;
 import com.focust.api.security.SecurityConfiguration;
 
@@ -25,23 +26,23 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.TemporalType;
 
 /** Lombok **/
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import lombok.AccessLevel;
 
 /** Standard Java / JDBC **/
 import java.time.ZonedDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 ///////////////////////////////////////////////////////////
 
-@NoArgsConstructor
 @Entity @Table(name="users")
 public class User {
 
@@ -71,17 +72,26 @@ public class User {
 
     @Getter @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    private @Column(name="joined_on", updatable = false) ZonedDateTime joinDate;
+    private @Column(name="joined_on", updatable=false) ZonedDateTime joinDate;
 
     @Getter @Setter
-    @OneToMany(mappedBy="user")
-    private List<ProjectMembership> projects;
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+    private Set<ProjectMembership> projects;
 
-    public User(NewUserRequest formData) {
-        this.username = formData.getUsername();
-        this.passwordHash = SecurityConfiguration.getEncoder().encode(formData.getPassword());
-        this.email = formData.getEmail();
+    public User() {
         this.joinDate = ZonedDateTime.now();
+        this.projects = new HashSet<>();
+    }
+
+    public void setPassword(String password) {
+        this.passwordHash = SecurityConfiguration.getEncoder().encode(password);
+    }
+
+    public void addProject(ProjectMembership membership) {
+        this.projects.add(membership);
+        for (ProjectMembership project: this.projects) {
+            project.setUser(this);
+        }
     }
 
 }

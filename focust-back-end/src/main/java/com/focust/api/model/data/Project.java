@@ -14,6 +14,7 @@ package com.focust.api.model.data;
 
 /** Focust **/
 import com.focust.api.dto.request.NewProjectRequest;
+import com.focust.api.enums.ProjectRole;
 import com.focust.api.model.relational.ProjectMembership;
 
 /** JPA / Hibernate **/
@@ -25,6 +26,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.GenerationType;
 
@@ -34,9 +36,10 @@ import lombok.Setter;
 
 import lombok.AccessLevel;
 
-/** Standard Java / JDBC **/
+/** Standard Java **/
 import java.time.ZonedDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 ///////////////////////////////////////////////////////////
 
@@ -44,7 +47,7 @@ import java.util.List;
 public class Project {
 
     @Getter @Setter(AccessLevel.PROTECTED)
-    @Id @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private @Column(name="project_id") Long id;
 
     @Getter @Setter
@@ -55,15 +58,23 @@ public class Project {
 
     @Getter @Setter
     @Temporal(TemporalType.TIMESTAMP)
-    private @Column(name="created_on", updatable = false) ZonedDateTime creation_date;
+    private @Column(name="created_on", updatable=false) ZonedDateTime creationDate;
 
     @Getter @Setter
-    @OneToMany(mappedBy="project")
-    private List<ProjectMembership> members;
+    @OneToMany(mappedBy="project", cascade=CascadeType.ALL, orphanRemoval=true)
+    private Set<ProjectMembership> members;
 
-    public Project(NewProjectRequest formData) {
-        this.name = formData.getName();
-        this.description = formData.getDescription();
+    public Project() {
+        this.creationDate = ZonedDateTime.now();
+        this.members = new HashSet<>();
+    }
+
+    // This method is used when a user joins or creates a project.
+    public void addMember(ProjectMembership membership) {
+        this.members.add(membership);
+        for (ProjectMembership member: this.members) {
+            member.setProject(this);
+        }
     }
 
 }
