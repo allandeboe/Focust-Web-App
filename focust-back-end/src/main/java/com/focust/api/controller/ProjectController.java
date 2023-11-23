@@ -19,6 +19,7 @@ package com.focust.api.controller;
 import com.focust.api.controller.util.CRUDController;
 import com.focust.api.dto.request.NewProjectRequest;
 import com.focust.api.dto.response.ProjectDetails;
+import com.focust.api.dto.response.ProjectMemberDetails;
 import com.focust.api.dto.util.ResponseCreator;
 import com.focust.api.enums.ProjectRole;
 import com.focust.api.model.data.Project;
@@ -29,7 +30,9 @@ import com.focust.api.model.repository.ProjectRepository;
 /** Spring Framework **/
 import com.focust.api.model.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -42,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /** Standard Java **/
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +69,9 @@ public class ProjectController {
         Optional<Project> existingProject = Optional.ofNullable(projectRepository.getByProjectName(formData.getName()));
         if (existingProject.isPresent()) return new ResponseEntity<>(null, HttpStatus.OK);
 
+        // The CRUDController.create() function isn't used as it is only used when we only need
+        // to add a new entry to only one table. In this situation, we need two tables to update,
+        // as we want to mark that a given user is the owner of the newly created project.
         try {
             Project newProject = formData.unload();
             User existingUser = userRepository.getReferenceById(formData.getCreatorId());
@@ -79,6 +86,8 @@ public class ProjectController {
             newProject.addMember(membership);
             existingUser.addProject(membership);
 
+            // Trying to save both the user and project repositories will
+            // cause problems, so just don't.
             projectRepository.save(newProject);
 
             ResponseCreator<ProjectDetails, Project> translator = new ResponseCreator<>(ProjectDetails.class);
@@ -92,9 +101,13 @@ public class ProjectController {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+    ///////////////////////////////////////////////////////
 
-        // return CRUDController.create(projectRepository, formData, ProjectDetails.class);
+    @GetMapping(value="", produces="application/json")
+    public ResponseEntity<List<ProjectDetails>> getAll() {
+        return CRUDController.getAll(projectRepository, ProjectDetails.class);
     }
 
     @GetMapping(value="/{id}", produces="application/json")
@@ -102,9 +115,22 @@ public class ProjectController {
         return CRUDController.getById(projectRepository, id, ProjectDetails.class);
     }
 
-    @GetMapping(value="", produces="application/json")
-    public ResponseEntity<List<ProjectDetails>> getAll() {
-        return CRUDController.getAll(projectRepository, ProjectDetails.class);
+    @GetMapping(value="/{id}/members", produces="application/json")
+    public ResponseEntity<List<ProjectMemberDetails>> getMembers(@PathVariable long id) {
+        try {
+
+            // userRepository is used as it makes it easier to get the needed data
+            Pageable firstPage = PageRequest.of(0, 15);
+            Page<ProjectMemberDetails> allEntries = userRepository.getMembersOf(id, firstPage);
+            if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
+
+            return new ResponseEntity<>(allEntries.toList(), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println();
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     ///////////////////////////////////////////////////////

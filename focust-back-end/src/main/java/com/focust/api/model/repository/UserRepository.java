@@ -21,9 +21,12 @@ package com.focust.api.model.repository;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
+import com.focust.api.dto.response.ProjectMemberDetails;
 import com.focust.api.model.data.User;
 
 /** Spring Framework **/
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
@@ -38,5 +41,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Used when checking if a user already exists.
     @Query("SELECT u FROM User u WHERE u.username = :username")
     User getByUsername(@Param("username") String username);
+
+    // This is what raw-dogging SQL looks like...
+    @Query("SELECT NEW com.focust.api.dto.response.ProjectMemberDetails(u.id, u.username, m.role) FROM User u INNER JOIN u.projects m WHERE m.project.id = :projectId")
+    Page<ProjectMemberDetails> getMembersOf(@Param("projectId") Long projectId, Pageable pageable);
 
 }

@@ -19,14 +19,12 @@ package com.focust.api.controller;
 import com.focust.api.controller.util.CRUDController;
 import com.focust.api.dto.response.BasicUserDetails;
 import com.focust.api.dto.request.NewUserRequest;
-import com.focust.api.dto.util.ResponseCreator;
-import com.focust.api.model.data.Project;
+import com.focust.api.dto.response.UserProjectDetails;
 import com.focust.api.model.data.User;
-import com.focust.api.model.relational.ProjectMembership;
+import com.focust.api.model.repository.ProjectRepository;
 import com.focust.api.model.repository.UserRepository;
 
 /** Standard Java **/
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +52,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ProjectRepository projectRepository;
+
     ///////////////////////////////////////////////////////
 
     @PostMapping(value="", produces="application/json")
@@ -66,14 +67,34 @@ public class UserController {
         return CRUDController.create(userRepository, formData, BasicUserDetails.class);
     }
 
+    ///////////////////////////////////////////////////////
+
+    @GetMapping(value="", produces="application/json")
+    public ResponseEntity<List<BasicUserDetails>> getAll() {
+        return CRUDController.getAll(userRepository, BasicUserDetails.class);
+    }
+
     @GetMapping(value="/{id}", produces="application/json")
     public ResponseEntity<BasicUserDetails> getById(@PathVariable long id) {
         return CRUDController.getById(userRepository, id, BasicUserDetails.class);
     }
 
-    @GetMapping(value="", produces="application/json")
-    public ResponseEntity<List<BasicUserDetails>> getAll() {
-        return CRUDController.getAll(userRepository, BasicUserDetails.class);
+    @GetMapping(value="/{id}/projects", produces="application/json")
+    public ResponseEntity<List<UserProjectDetails>> getJoinedProjects(@PathVariable long id) {
+        try {
+
+            // projectRepository is used as it makes it easier to get the needed data
+            Pageable firstPage = PageRequest.of(0, 15);
+            Page<UserProjectDetails> allEntries = projectRepository.getJoinedProjects(id, firstPage);
+            if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
+
+            return new ResponseEntity<>(allEntries.toList(), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println();
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     ///////////////////////////////////////////////////////

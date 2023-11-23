@@ -21,9 +21,12 @@ package com.focust.api.model.repository;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
+import com.focust.api.dto.response.UserProjectDetails;
 import com.focust.api.model.data.Project;
 
 /** Spring Framework **/
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
@@ -37,5 +40,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Query("SELECT p FROM Project p WHERE p.name = :project_name")
     Project getByProjectName(@Param("project_name") String name);
+
+    @Query("SELECT NEW com.focust.api.dto.response.UserProjectDetails(p.id, p.name, m.role) FROM Project p INNER JOIN p.members m WHERE m.user.id = :userId")
+    Page<UserProjectDetails> getJoinedProjects(@Param("userId") Long userId, Pageable pageable);
 
 }
