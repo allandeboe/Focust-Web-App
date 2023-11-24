@@ -13,6 +13,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Users from './pages/Users';
+import UserPage from './pages/UserPage';
 
 import NoPage from './pages/NoPage';
 
@@ -40,6 +41,7 @@ export default function Main() {
                 <Route path="/" element={<Home/>} />
                 <Route path="/about-us" element={<About/>} />
                 <Route path="/users" element={<Users/>} />
+                <Route path="/users/:userId" element={<UserPage/>} />
 
                 <Route path="*" element={<NoPage/>} />
             </Routes>

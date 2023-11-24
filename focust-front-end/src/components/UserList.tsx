@@ -8,6 +8,7 @@
  * @date November 10th, 2023
  */
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import '../main_style.css';
 
 ///////////////////////////////////////
@@ -38,7 +39,7 @@ function NoUsersDisplay() {
 function BasicUserDisplay(user: BasicUserDetails) {
     return (
         <tr key={user.id}>
-            <td>{user.username}</td>
+            <td><Link to={`/users/${user.id}`}>{user.username}</Link></td>
             <td>{user.email}</td>
         </tr>
     );

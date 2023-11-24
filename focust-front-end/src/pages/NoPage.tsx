@@ -17,10 +17,12 @@ export default class Home extends Component {
                 <div className="segment">
                     <h1>Page not found or doesn't exist</h1>
                 </div>
-                <div className="dark-segment">
-                    <p>
-                    To go back to the main page, <Link to="/">click here!</Link>
-                    </p>
+                <div className="container">
+                    <div className="dark-segment">
+                        <p>
+                        To go back to the main page, <Link to="/">click here!</Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         );

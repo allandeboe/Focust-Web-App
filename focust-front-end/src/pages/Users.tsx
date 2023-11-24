@@ -18,8 +18,10 @@ export default class Users extends Component {
                 <div className="segment text-center">
                     <h1>Users</h1>
                 </div>
-                <div className="dark-segment">
-                    <UserList/>
+                <div className="container">
+                    <div className="dark-segment">
+                        <UserList/>
+                    </div>
                 </div>
             </div>
         );

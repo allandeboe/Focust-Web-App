@@ -18,6 +18,7 @@ export class Navigation extends Component {
             <nav className="bg-transparent p-4 text-center">
                 <Link to="/">Home</Link>
                 <Link to="/about-us">About Us</Link>
+                <Link to="/users">Users</Link>
             </nav>
         );
     }
