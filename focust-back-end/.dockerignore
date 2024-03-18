@@ -1,0 +1,16 @@
+# .dockerignore
+# 
+# Made to remove files only used for development and not production
+# when running a docker container.
+#
+# @author   Allan DeBoe (allan.m.deboe@gmail.com)
+# @date     March 16th, 2024
+
+# Removed since it only matters in development and not in production
+.git
+.gitignore
+.idea
+README.md
+
+# Removed since production will run on Linux, not Windows
+run.bat

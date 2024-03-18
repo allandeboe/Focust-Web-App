@@ -41,6 +41,7 @@ These are the dependencies that do not fall under the other two categories, and 
 
 * [**MySQL**](https://www.mysql.com/) - an open-sourced, SQL relational database from Oracle; used as the database of choice, due to how prominent it is in job descriptions ([*Microsoft SQL Server*](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) could also work, although it will require one to change the JDBC Driver to the **MS SQL Server Driver** in *Spring Initializr*).
 
-## Installation, Set-up, & Interaction
-For instructions regarding the installation & set-up for both front-end and back-end servers, read the `INSTALLATION.md` file in this directory. 
+* [**Docker**](https://www.docker.com/) - a piece of open-source software that deals with deploying software applications in *containers*, which are essentially like small & compact virtual machines. This is used to allow a more easy deployment process for this project, if I do decide to have this web application run on the web. 
 
+## Installation, Set-up, & Interaction
+For instructions regarding the installation & set-up for both front-end and back-end servers, read the `INSTALLATION.md` file in this directory.
