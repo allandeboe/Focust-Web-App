@@ -4,9 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### application.properties & docker-compose.yml ###
+### application.properties ###
 /src/main/resources/application.properties
-docker-compose.yml
 
 ### STS ###
 .apt_generated

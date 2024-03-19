@@ -47,5 +47,5 @@
   "devDependencies": {
     "tailwindcss": "^3.3.5"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://spring-app:8080"
 }

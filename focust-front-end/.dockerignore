@@ -1,0 +1,16 @@
+# .dockerignore
+# 
+# Made to remove files only used for development and not production
+# when running a docker container.
+#
+# @author   Allan DeBoe (allan.m.deboe@gmail.com)
+# @date     March 18th, 2024
+
+# Removed since it only matters in development and not in production
+.gitignore
+README.md
+
+# Removed as the docker container will be doing them instead
+/node_modules
+/build
+/src/main_style.css

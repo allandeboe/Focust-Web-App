@@ -4,7 +4,7 @@
 # back-end server.
 #
 # @author   Allan DeBoe (allan.m.deboe@gmail.com)
-# @date     March 16th, 2024
+# @date     March 18th, 2024
 
 ###########################################################
 # DOCKER IMAGE SET-UP
@@ -12,14 +12,18 @@
 FROM debian:bookworm-20240311
 
 # COPY PROJECT
-WORKDIR /usr/src/focust-spring-app
+WORKDIR /usr/src/focust-react-app
 COPY . .
 
 # DEPENDENCY INSTALLATION
 RUN apt-get update && \
     apt-get upgrade && \
-    apt-get install openjdk-17-jdk openjdk-17-jre maven -y
+    apt-get install nodejs -y
+
+RUN apt-get install npm -y && \
+    npm install && \
+    npm run build
 
 # BUILD TARGET & RUN
-CMD ["mvn", "spring-boot:run"]
-EXPOSE 8080
+CMD ["npm", "start"]
+EXPOSE 3000
