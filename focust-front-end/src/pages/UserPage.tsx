@@ -17,18 +17,6 @@ import UserProjectList from "../components/UserProjectList";
 import NoPage from "./NoPage";
 
 import '../main_style.css';
-import { userInfo } from "os";
-
-///////////////////////////////////////
-
-// Contains basic user information that
-// we would want to display.
-interface BasicUserDetails {
-    id: number;
-    username: string;
-    email: string;
-    github?: string;
-}
 
 ///////////////////////////////////////
 
