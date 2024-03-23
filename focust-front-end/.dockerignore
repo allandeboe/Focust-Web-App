@@ -6,6 +6,10 @@
 # @author   Allan DeBoe (allan.m.deboe@gmail.com)
 # @date     March 18th, 2024
 
+# Removed since it doesn't really matter
+.dockerignore
+Dockerfile
+
 # Removed since it only matters in development and not in production
 .gitignore
 README.md

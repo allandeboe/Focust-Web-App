@@ -109,3 +109,9 @@ Once you are done, you can stop the program by hitting `CTRL + C` and writing th
 ```shell
 docker compose down
 ```
+
+If you don't want to do all of that, well, if you are on *Windows*, you can simply run the following command:
+
+```shell
+run.bat
+```
