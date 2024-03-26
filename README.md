@@ -36,6 +36,8 @@ All of these will use the [*Node.js Project Manager*](https://www.npmjs.com/) (`
 
 * [**TailwindCSS**](https://tailwindcss.com/) - contains many useful CSS classes that makes it clear what stylings are applied to the JSX/HTML markup, which removes a lot of headaches and improves productivity at least when dealing with stylizing the site.
 
+* [**JEST**](https://jestjs.io/) - used primarily to test front-end code, which is useful when dealing with front-end functionality.
+
 ### Other
 These are the dependencies that do not fall under the other two categories, and are 
 
