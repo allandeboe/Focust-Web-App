@@ -11,17 +11,18 @@
 # (update image version at your own risk)
 FROM debian:bookworm-20240311
 
-# COPY PROJECT
-WORKDIR /usr/src/focust-react-app
-COPY . .
-
 # DEPENDENCY INSTALLATION
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install nodejs -y
 
-RUN apt-get install npm -y && \
-    npm install && \
+RUN apt-get install npm -y
+
+# COPY PROJECT
+WORKDIR /usr/src/focust-react-app
+COPY . .
+
+RUN npm install && \
     npm run build
 
 # BUILD TARGET & RUN

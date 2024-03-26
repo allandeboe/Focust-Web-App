@@ -11,14 +11,14 @@
 # (update image version at your own risk)
 FROM debian:bookworm-20240311
 
-# COPY PROJECT
-WORKDIR /usr/src/focust-spring-app
-COPY . .
-
 # DEPENDENCY INSTALLATION
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install openjdk-17-jdk openjdk-17-jre maven -y
+
+# COPY PROJECT
+WORKDIR /usr/src/focust-spring-app
+COPY . .
 
 # BUILD TARGET & RUN
 CMD ["mvn", "spring-boot:run"]
