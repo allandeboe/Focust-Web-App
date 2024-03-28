@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 ///////////////////////////////////////
 
 // Contains the projects that the user
-// is a part of
+// is a part of.
 interface UserProjectDetails {
     projectId: number;
     projectName: string;

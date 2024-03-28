@@ -9,10 +9,10 @@
 ###########################################################
 # DOCKER IMAGE SET-UP
 # (update image version at your own risk)
-FROM debian:bookworm-20240311
+FROM debian:latest
 
 # DEPENDENCY INSTALLATION
-RUN apt-get update && \
+RUN apt-get update --fix-missing && \
     apt-get upgrade && \
     apt-get install openjdk-17-jdk openjdk-17-jre maven -y
 

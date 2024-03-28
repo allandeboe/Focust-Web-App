@@ -27,13 +27,13 @@ import lombok.NonNull;
 public class ProjectMemberDetails implements Response {
 
     @Getter
-    private Long userId;
+    private final Long userId;
 
     @Getter
-    private String username;
+    private final String username;
 
     @Getter
-    private ProjectRole projectRole;
+    private final ProjectRole projectRole;
 
     public ProjectMemberDetails(@NonNull Long userId, @NonNull String username, @NonNull ProjectRole projectRole) {
         this.userId = userId;

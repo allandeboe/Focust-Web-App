@@ -18,7 +18,7 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    @apply h-full w-full p-2;
+    @apply h-full w-full;
     @apply font-light text-base;
     @apply bg-gradient-to-tl from-transparent from-20% to-blue-500;
   }
@@ -49,11 +49,13 @@
   /** Hyperlinks (Main) **/
 
   .main a {
-    transition: color 0.75s;
+    transition: color 0.75s, text-shadow 0.7s;
+    text-shadow: 0px 0px 0px #101010;
     @apply no-underline text-purple-300;
   }
 
   .main a:hover {
+    text-shadow: 0px 0px 8px #f472b6;
     @apply text-pink-300;
   }
 
@@ -78,14 +80,19 @@
 
   /** Hyperlinks (Navigation) **/
 
+  nav {
+    background-color: #101010;
+    @apply p-4 text-center;
+  }
+
   nav a {
-    transition: background-color 0.75s;
-    @apply text-center text-lg text-white font-bold tracking-tight;
-    @apply p-3 m-1 rounded-lg;
+    transition: text-shadow 0.75s;
+    text-shadow: 0px 0px 0px #101010;
+    @apply p-3 text-center text-lg text-white font-bold tracking-tight;
   }
 
   nav a:hover {
-    background-color: #101010;
+    text-shadow: 0px 0px 16px #4c1d95;
   }
 
   /** Custom Classes **/

@@ -9,22 +9,32 @@
 ###########################################################
 # DOCKER IMAGE SET-UP
 # (update image version at your own risk)
-FROM debian:bookworm-20240311
+FROM debian:latest
 
 # DEPENDENCY INSTALLATION
-RUN apt-get update && \
+RUN apt-get update --fix-missing && \
     apt-get upgrade && \
     apt-get install nodejs -y
 
-RUN apt-get install npm -y
+# This command is unusually long in cases where
+# there are problems with the installation of
+# npm due to issues with deb.debian.org:80
+RUN apt-get install npm -y || \
+    apt-get update --fix-missing && \
+    apt-get install npm -y
 
 # COPY PROJECT
 WORKDIR /usr/src/focust-react-app
 COPY . .
 
-RUN npm install && \
+# UPDATE NPM IF NEEDED
+RUN npm update
+
+# BUILD PROJECT
+RUN npm cache clean --force && \
+    npm install && \
     npm run build
 
-# BUILD TARGET & RUN
+# RUN
 CMD ["npm", "start"]
 EXPOSE 3000
