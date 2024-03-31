@@ -13,7 +13,8 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
      id="namedview7"
      pagecolor="#ffffff"
      bordercolor="#999999"
@@ -32,144 +33,177 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer8" /><defs
-     id="defs2"><rect
-       x="169.63832"
-       y="26.971783"
-       width="407.41587"
-       height="96.53059"
-       id="rect395" /></defs><g
+     inkscape:current-layer="layer8" />
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700');
+    </style>
+  </defs>
+  <defs id="defs2">
+     <rect x="169.63832" y="26.971783" width="407.41587" height="96.53059" id="rect395" />
+  </defs>
+  <g
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="banner"
      inkscape:export-filename="..\..\..\..\..\..\Users\Allan DeBoe\Desktop\Focust-Web-App\references\banner.png"
      inkscape:export-xdpi="283.55536"
-     inkscape:export-ydpi="283.55536"><g
+     inkscape:export-ydpi="283.55536">
+    <g
        inkscape:groupmode="layer"
        id="layer2"
        inkscape:label="logo"
        style="opacity:1"
-       transform="translate(-4.1778968,-6.4849999)"><g
+       transform="translate(-4.1778968,-6.4849999)">
+      <g
          inkscape:groupmode="layer"
          id="layer3"
-         inkscape:label="background"><rect
+         inkscape:label="background">
+        <rect
            style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.42572;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
            id="rect966"
            width="167.70003"
            height="43.437634"
            x="5.3907604"
-           y="7.6978641" /></g><g
+           y="7.6978641" />
+      </g>
+      <g
          inkscape:groupmode="layer"
          id="layer7"
          inkscape:label="pink"
-         style="opacity:1"><rect
+         style="opacity:1">
+         <rect
            style="opacity:1;fill:#f472b6;fill-opacity:1;stroke:#f472b6;stroke-width:1.23721;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect3201-7"
            width="14.654568"
            height="4.2341957"
            x="31.568783"
-           y="35.733814" /></g><g
+           y="35.733814" />
+      </g>
+      <g
          inkscape:groupmode="layer"
          id="layer10"
          inkscape:label="deep-purple"
-         style="opacity:1"><rect
+         style="opacity:1">
+        <rect
            style="opacity:1;fill:#4c1d95;fill-opacity:1;stroke:#4c1d95;stroke-width:1.40845;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect3201"
            width="15.398049"
            height="5.2224627"
            x="30.77322"
-           y="27.73213" /><ellipse
+           y="27.73213" />
+        <ellipse
            style="opacity:1;fill:#4c1d95;fill-opacity:1;stroke:#4c1d95;stroke-width:1.38907;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="path1595-5-7"
            cx="46.839951"
            cy="27.0541"
            rx="5.9021292"
-           ry="5.9021273" /><rect
+           ry="5.9021273" />
+        <rect
            style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.38314;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect2991"
            width="13.072019"
            height="7.4222803"
            x="40.401573"
-           y="18.918917" /></g><g
+           y="18.918917" />
+      </g>
+      <g
          inkscape:groupmode="layer"
          id="layer5"
          inkscape:label="black"
-         transform="translate(-3.7466762,-0.115994)"><rect
+         transform="translate(-3.7466762,-0.115994)">
+        <rect
            style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.773335;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect2991-0"
            width="8.6615829"
            height="3.5017822"
            x="-8.4515114"
            y="43.330765"
-           transform="rotate(-54.636548)" /><rect
+           transform="rotate(-54.636548)" />
+        <rect
            style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.773335;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect2991-0-3"
            width="8.6615829"
            height="3.5017822"
            x="-15.162999"
            y="43.315353"
-           transform="rotate(-54.753067)" /></g><g
+           transform="rotate(-54.753067)" />
+      </g>
+      <g
          inkscape:groupmode="layer"
          id="layer9"
          inkscape:label="foot"
          style="opacity:1"
-         transform="translate(1.3006306,0.003349)"><ellipse
+         transform="translate(1.3006306,0.003349)">
+        <ellipse
            style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.41181;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="path1595-5-5-8"
            cx="30.004843"
            cy="40.737087"
            rx="5.9987006"
-           ry="5.9987636" /><ellipse
+           ry="5.9987636" />
+        <ellipse
            style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.05559;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="path1595-5-5"
            cx="30.005699"
            cy="40.764629"
            rx="4.4851551"
-           ry="4.4852023" /></g><rect
+           ry="4.4852023" />
+      </g>
+      <rect
          style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.17869;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect2991-9"
          width="13.276474"
          height="5.3071399"
          x="24.63706"
-         y="41.175556" /><g
+         y="41.175556" />
+      <g
          id="layer4"
          inkscape:label="white"
          style="opacity:1"
          inkscape:groupmode="layer"
-         transform="matrix(0.74256007,0,0,0.74256007,4.1777156,8.8275556)"><ellipse
+         transform="matrix(0.74256007,0,0,0.74256007,4.1777156,8.8275556)">
+        <ellipse
            style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.44052;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="path1595"
            cx="23.084494"
            cy="34.493973"
            rx="6.1207123"
-           ry="6.1207767" /><ellipse
+           ry="6.1207767" />
+        <ellipse
            style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.44052;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="path1595-5"
            cx="35.319668"
            cy="16.402193"
            rx="6.1207123"
-           ry="6.1207767" /><rect
+           ry="6.1207767" />
+        <rect
            style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.12866;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect2966"
            width="20.991354"
            height="12.552472"
            x="-5.579545"
            y="-44.720562"
-           transform="rotate(124.06301)" /></g></g><g
+           transform="rotate(124.06301)" />
+      </g>
+    </g>
+    <g
        inkscape:groupmode="layer"
        id="layer6"
-       inkscape:label="text"><text
+       inkscape:label="text">
+      <text
          xml:space="preserve"
-         transform="scale(0.26458333)"
-         id="text393"
-         style="font-style:italic;font-weight:300;font-size:32px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans Italic';text-align:center;white-space:pre;shape-inside:url(#rect395);display:inline;fill:#fefeff;fill-opacity:1;stroke:#4c1d95;stroke-width:4.53543;stroke-linecap:round;paint-order:stroke fill markers" /><text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.9833px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans Bold';text-align:center;letter-spacing:-0.949854px;word-spacing:0px;text-anchor:middle;fill:#fefeff;fill-opacity:1;stroke:none;stroke-width:1.2;stroke-linecap:round;stroke-opacity:1;paint-order:stroke fill markers"
-         x="103.28831"
+         style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:35.9833px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans';text-align:center;letter-spacing:-2px;word-spacing:0px;text-anchor:middle;fill:#fefeff;fill-opacity:1;stroke:none;stroke-width:1.2;stroke-linecap:round;stroke-opacity:1;paint-order:stroke fill markers"
+         x="130.28831"
          y="34.17905"
-         id="text1555"><tspan
+         id="text1555">
+        <tspan
            sodipodi:role="line"
            id="tspan1553"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.9833px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans Bold';stroke:none;stroke-width:1.2;stroke-opacity:1"
-           x="102.81338"
-           y="34.17905">Focust</tspan></text></g></g></svg>
+           style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:35.9833px;font-family:'DM Sans';-inkscape-font-specification:'DM Sans';stroke:none;stroke-width:1.2;stroke-opacity:1"
+           x="130.81338"
+           y="34.17905">Focust</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
