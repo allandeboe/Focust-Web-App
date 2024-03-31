@@ -80,9 +80,13 @@
 
   /** Hyperlinks (Navigation) **/
 
-  nav {
+  .navigation {
     background-color: #101010;
-    @apply p-4 text-center;
+    @apply text-center p-4;
+  }
+
+  nav {
+    @apply p-1;
   }
 
   nav a {

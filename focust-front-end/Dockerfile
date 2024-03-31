@@ -13,7 +13,7 @@ FROM debian:latest
 
 # DEPENDENCY INSTALLATION
 RUN apt-get update --fix-missing && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get install nodejs -y
 
 # This command is unusually long in cases where

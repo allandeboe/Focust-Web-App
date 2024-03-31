@@ -13,7 +13,10 @@ FROM debian:latest
 
 # DEPENDENCY INSTALLATION
 RUN apt-get update --fix-missing && \
-    apt-get upgrade && \
+    apt-get upgrade -y
+
+RUN apt-get install openjdk-17-jdk openjdk-17-jre maven -y || \
+    apt-get update --fix-missing && \
     apt-get install openjdk-17-jdk openjdk-17-jre maven -y
 
 # COPY PROJECT
