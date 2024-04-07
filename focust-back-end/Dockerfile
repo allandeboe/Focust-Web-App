@@ -15,13 +15,14 @@ FROM debian:latest
 RUN apt-get update --fix-missing && \
     apt-get upgrade -y
 
-RUN apt-get install openjdk-17-jdk openjdk-17-jre maven -y || \
-    apt-get update --fix-missing && \
-    apt-get install openjdk-17-jdk openjdk-17-jre maven -y
-
 # COPY PROJECT
 WORKDIR /usr/src/focust-spring-app
 COPY . .
+
+# This command is unusually long in cases where
+# there are problems with the installation of
+# certain packages due to issues with deb.debian.org:80
+RUN ./dependencies.sh
 
 # BUILD TARGET & RUN
 CMD ["mvn", "spring-boot:run"]

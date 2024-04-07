@@ -13,19 +13,16 @@ FROM debian:latest
 
 # DEPENDENCY INSTALLATION
 RUN apt-get update --fix-missing && \
-    apt-get upgrade -y && \
-    apt-get install nodejs -y
-
-# This command is unusually long in cases where
-# there are problems with the installation of
-# npm due to issues with deb.debian.org:80
-RUN apt-get install npm -y || \
-    apt-get update --fix-missing && \
-    apt-get install npm -y
+    apt-get upgrade -y
 
 # COPY PROJECT
 WORKDIR /usr/src/focust-react-app
 COPY . .
+
+# This command is unusually long in cases where
+# there are problems with the installation of
+# certain packages due to issues with deb.debian.org:80
+RUN ./dependencies.sh
 
 # UPDATE NPM IF NEEDED
 RUN npm update
