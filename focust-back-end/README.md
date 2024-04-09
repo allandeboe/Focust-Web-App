@@ -13,6 +13,19 @@ The back-end is a *monolithic* architecture, which *does not scale very well* an
 ## Regarding the REST Requests
 All REST requests return and/or accept JSON, along with some HTTP Status Code. replace the value `[PORT]` with the port set by `server.port` in the `application.properties` file in the `focust-back-end/src/main/resources` directory.
 
+### Note (As of April 8th, 2024)
+All requests, except for `GET` requests, will require a login, which is for Spring Security. For that, you will need to add the following lines to the `application.properties` file if you ever want to plan sending `POST` requests:
+
+```properties
+# ...
+
+# Spring Security Authentication.
+spring.security.user.name = [SPRING_USER]
+spring.security.user.password = [SPRING_PASSWORD]
+```
+
+This will be replaced with JWT Tokens in a future commit, but, for now, keep this in mind when interacting with the back-end server using CURL or Postman.
+
 ## GET Requests
 
 ### Users

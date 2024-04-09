@@ -26,6 +26,11 @@ spring.datasource.username = root
 
 # Replace [PASSWORD] with the password of the database root
 spring.datasource.password = [PASSWORD]
+
+# Spring Actuator (Only Health Endpoint Matters)
+management.endpoints.enabled-by-default=false
+management.endpoint.health.enabled=true
+management.endpoints.web.exposure.include=health
 ```
 
 Make sure you remember `[PASSWORD]`, as you will need it later for another file.

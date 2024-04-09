@@ -1,26 +1,46 @@
 /**
- * SecurityConfiguration
+ * SecurityConfiguration.java
  *
- * This class contains methods that relate to security, from
- * what kind of hash will be used for passwords and such.
+ * Will be useful for later when handling security-related
+ * implementations, like JWT tokens, and user authentication and
+ * authorization.
  *
- * @author Allan DeBoe (allan.m.deboe@gmail.com)
- * @date November 6th, 2023
+ * @author  Allan DeBoe (allan.m.deboe@gmail.com)
+ * @date    April 7th, 2024
  */
 package com.focust.api.security;
 
 ///////////////////////////////////////////////////////////
 
 /** Spring Framework **/
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 ///////////////////////////////////////////////////////////
 
+@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
 
-    public static PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2B, 12);
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // GET requests should be authorized for even anonymous users
+        http.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.GET).permitAll());
+
+        // Other kinds of requests will require proper authorization.
+        // For now, this is done through spring auth, but later JWT tokens will be
+        // implemented to handle this instead.
+        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        return http.build();
     }
 
 }

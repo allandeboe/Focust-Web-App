@@ -12,10 +12,8 @@ package com.focust.api.model.data;
 ///////////////////////////////////////////////////////////
 
 /** Focust **/
-import com.focust.api.dto.request.NewUserRequest;
-import com.focust.api.enums.ProjectRole;
 import com.focust.api.model.relational.ProjectMembership;
-import com.focust.api.security.SecurityConfiguration;
+import com.focust.api.security.util.SecurityUtil;
 
 /** JPA / Hibernate **/
 import jakarta.persistence.Column;
@@ -84,7 +82,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.passwordHash = SecurityConfiguration.getEncoder().encode(password);
+        this.passwordHash = SecurityUtil.getEncoder().encode(password);
     }
 
     public void addProject(ProjectMembership membership) {

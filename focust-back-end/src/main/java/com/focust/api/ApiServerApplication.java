@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
 import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -34,7 +35,8 @@ public class ApiServerApplication {
 	Environment environment;
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiServerApplication.class, args);
+		SpringApplication spring_app = new SpringApplication(ApiServerApplication.class);
+		spring_app.run(args);
 	}
 
 	@Bean
