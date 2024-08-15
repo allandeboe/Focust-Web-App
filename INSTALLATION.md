@@ -8,6 +8,9 @@ Since the project will be run using Docker, the only things you need to install 
 
 Don't worry, each of the docker images will handle the dependency installations for their respective servers, so no need to worry from that end. 
 
+## Things to Check First
+When it comes to the `dependencies.sh` files (or any of the bash files) in the project, make sure that the lines use `LF` (i.e. `\n`) instead of `CRLF` (i.e. `/r/n`), as Docker containers, which use Linux-based images, use these specific shell files, and thus require that lines end with `LF` instead of `CRLF`, which is for Windows.
+
 ## Set-up
 First, we are going to create some files that will be used to run the application. The first one we need to make is the `application.properties` file under `focust-back-end/src/main/resources`. After creating the file, open it up in a text editor and paste in the following content.
 

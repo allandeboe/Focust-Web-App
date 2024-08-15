@@ -16,13 +16,14 @@ RUN apt-get update --fix-missing && \
     apt-get upgrade -y
 
 # COPY PROJECT
-WORKDIR /usr/src/focust-react-app
-COPY . .
+COPY . /usr/src/focust-react-app/
+WORKDIR /usr/src/focust-react-app/
 
 # This command is unusually long in cases where
 # there are problems with the installation of
 # certain packages due to issues with deb.debian.org:80
-RUN ./dependencies.sh
+RUN chmod +x ./dependencies.sh
+RUN ["./dependencies.sh"]
 
 # UPDATE NPM IF NEEDED
 RUN npm update
