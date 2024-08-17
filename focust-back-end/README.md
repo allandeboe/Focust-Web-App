@@ -41,6 +41,8 @@ Each element in the list contains the following information:
 
 If there are no users stored, then a `204 NO CONTENT` HTTP response will be given.
 
+One can also specify the page number and even the number of entries per page as a part of the JSON request, using `page` for page number and `entriesPerPage` for the number of users per page. By default, `page` is set to 0 (first page) and `entriesPerPage` is 15.
+
 ---
 
 The following request can be used to get information about a single user with the given `[ID]`:
@@ -65,6 +67,8 @@ The response contains a list of JSON objects, each containing the following info
 
 If the user isn't a part of any projects, then a `204 NO CONTENT` HTTP response will be given.
 
+One can also specify the page number and even the number of entries per page as a part of the JSON request, using `page` for page number and `entriesPerPage` for the number of users per page. By default, `page` is set to 0 (first page) and `entriesPerPage` is 15.
+
 ### Projects
 
 To get information about all of the projects in the database, you can use the following request:
@@ -77,6 +81,8 @@ Each element in the list contains the following information:
 * `"description"` - the description given for the project.
 
 If there are no projects stored, then a `204 NO CONTENT` HTTP response will be given.
+
+One can also specify the page number and even the number of entries per page as a part of the JSON request, using `page` for page number and `entriesPerPage` for the number of users per page. By default, `page` is set to 0 (first page) and `entriesPerPage` is 15.
 
 ---
 
@@ -100,6 +106,8 @@ Each element of the resulting list contains the following information
 * `"userId"` - the id of the user.
 * `"username"` - the username of the user.
 * `"projectRole"` - the role that the user has for the project.
+
+One can also specify the page number and even the number of entries per page as a part of the JSON request, using `page` for page number and `entriesPerPage` for the number of users per page. By default, `page` is set to 0 (first page) and `entriesPerPage` is 15.
 
 ## POST Requests
 

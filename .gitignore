@@ -1,3 +1,6 @@
 # This is removed as it contains sensitive information
 /secrets
 docker-compose.yml
+
+# IntelliJ Idea
+.idea

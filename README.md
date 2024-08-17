@@ -26,6 +26,8 @@ These are the dependencies that involve the Java programming language, all of wh
 
 * [**Hibernate**](https://hibernate.org/) - a Java *object-relational mapping* (ORM) tool; allows one to create database tables from Java Classes; comes with the **Spring Data JPA** dependency on *Spring Initializr*, which also has support to specify *SQL* queries for the relational database if the need arises.
 
+* [**Mockito**](https://site.mockito.org/) - a Java Unit-testing tool that helps create mock dependencies needed for any given test. This is used as unit-testing with Spring ends up actually being slower due to the time taken to boot up the Spring application. 
+
 * **MySQL Driver** - used to allow the web server to use the MySQL database (see *MySQL*). Changing the kind of database will require this dependency to change to another JDBC Driver Dependency in *Spring Initializr*.
 
 ### JavaScript / TypeScript Dependencies

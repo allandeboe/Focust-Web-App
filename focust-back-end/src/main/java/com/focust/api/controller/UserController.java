@@ -17,31 +17,31 @@ package com.focust.api.controller;
 
 /** Focust **/
 import com.focust.api.controller.util.CRUDController;
-import com.focust.api.dto.response.BasicUserDetails;
 import com.focust.api.dto.request.NewUserRequest;
+import com.focust.api.dto.response.BasicUserDetails;
 import com.focust.api.dto.response.UserProjectDetails;
 import com.focust.api.model.data.User;
 import com.focust.api.model.repository.ProjectRepository;
 import com.focust.api.model.repository.UserRepository;
 
-/** Standard Java **/
-import java.util.List;
-import java.util.Optional;
-
 /** Spring Framework **/
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+
+/** Standard Java **/
+import java.util.List;
+import java.util.Optional;
 
 ///////////////////////////////////////////////////////////
 
@@ -70,8 +70,8 @@ public class UserController {
     ///////////////////////////////////////////////////////
 
     @GetMapping(value="", produces="application/json")
-    public ResponseEntity<List<BasicUserDetails>> getAll() {
-        return CRUDController.getAll(userRepository, BasicUserDetails.class);
+    public ResponseEntity<List<BasicUserDetails>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "15") int entriesPerPage) {
+        return CRUDController.getAll(userRepository, BasicUserDetails.class, page, entriesPerPage);
     }
 
     @GetMapping(value="/{id}", produces="application/json")
@@ -80,11 +80,13 @@ public class UserController {
     }
 
     @GetMapping(value="/{id}/projects", produces="application/json")
-    public ResponseEntity<List<UserProjectDetails>> getJoinedProjects(@PathVariable long id) {
+    public ResponseEntity<List<UserProjectDetails>> getJoinedProjects(@PathVariable long id, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "15") int entriesPerPage) {
         try {
 
+            if (page < 0 || entriesPerPage < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
             // projectRepository is used as it makes it easier to get the needed data
-            Pageable firstPage = PageRequest.of(0, 15);
+            Pageable firstPage = PageRequest.of(page, entriesPerPage);
             Page<UserProjectDetails> allEntries = projectRepository.getJoinedProjects(id, firstPage);
             if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
 

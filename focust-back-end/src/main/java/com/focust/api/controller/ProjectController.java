@@ -26,26 +26,27 @@ import com.focust.api.model.data.Project;
 import com.focust.api.model.data.User;
 import com.focust.api.model.relational.ProjectMembership;
 import com.focust.api.model.repository.ProjectRepository;
+import com.focust.api.model.repository.UserRepository;
+
+/** JPA / Jakarta **/
+import jakarta.persistence.EntityNotFoundException;
 
 /** Spring Framework **/
-import com.focust.api.model.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /** Standard Java **/
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,8 +107,8 @@ public class ProjectController {
     ///////////////////////////////////////////////////////
 
     @GetMapping(value="", produces="application/json")
-    public ResponseEntity<List<ProjectDetails>> getAll() {
-        return CRUDController.getAll(projectRepository, ProjectDetails.class);
+    public ResponseEntity<List<ProjectDetails>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "15") int entriesPerPage) {
+        return CRUDController.getAll(projectRepository, ProjectDetails.class, page, entriesPerPage);
     }
 
     @GetMapping(value="/{id}", produces="application/json")
@@ -116,11 +117,13 @@ public class ProjectController {
     }
 
     @GetMapping(value="/{id}/members", produces="application/json")
-    public ResponseEntity<List<ProjectMemberDetails>> getMembers(@PathVariable long id) {
+    public ResponseEntity<List<ProjectMemberDetails>> getMembers(@PathVariable long id, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "15") int entriesPerPage) {
         try {
 
+            if (page < 0 || entriesPerPage < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
             // userRepository is used as it makes it easier to get the needed data
-            Pageable firstPage = PageRequest.of(0, 15);
+            Pageable firstPage = PageRequest.of(page, entriesPerPage);
             Page<ProjectMemberDetails> allEntries = userRepository.getMembersOf(id, firstPage);
             if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
 

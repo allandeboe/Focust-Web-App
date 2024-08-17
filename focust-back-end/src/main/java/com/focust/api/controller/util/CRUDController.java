@@ -26,23 +26,22 @@ package com.focust.api.controller.util;
 
 /** Focust **/
 import com.focust.api.dto.util.Request;
-import com.focust.api.dto.util.ResponseCreator;
 import com.focust.api.dto.util.Response;
-
-/** Standard Java **/
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.focust.api.dto.util.ResponseCreator;
 
 /** Spring Framework **/
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+/** Standard Java **/
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 ///////////////////////////////////////////////////////////
 
@@ -72,15 +71,18 @@ public final class CRUDController {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // READ
 
-    public static <T, R extends Response> ResponseEntity<List<R>> getAll(JpaRepository<T, Long> repository, Class<R> resultClass) {
+    /* Used when there is a bunch of data and thus pagination is needed */
+    public static <T, R extends Response> ResponseEntity<List<R>> getAll(JpaRepository<T, Long> repository, Class<R> resultClass, int pageNumber, int entriesPerPage) {
 
         try {
 
+            if (pageNumber < 0 || entriesPerPage < 1) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
             /* This should allow pagination, as the number of potential items might be very, very large
-             * and thus sending the entire list would actually be a nonsensical idea.
-             * (Yay for the fact that JpaRepository extends PagingAndSortingRepository.
+             * and thus sending the entire list would be rather impractical and may too much time.
+             * (Yay for the fact that JpaRepository extends PagingAndSortingRepository.)
              */
-            Pageable firstPage = PageRequest.of(0, 15);
+            Pageable firstPage = PageRequest.of(pageNumber, entriesPerPage);
             Page<T> allEntries = repository.findAll(firstPage);
             if (allEntries.isEmpty()) { return new ResponseEntity<>(null, HttpStatus.NO_CONTENT); }
 
