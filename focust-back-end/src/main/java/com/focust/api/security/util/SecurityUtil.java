@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  *
- * /////////////////////////////////////////////////////////////
+ * //////////////////////////////////////////////////////////////////////
  *
  * This class contains methods that relate to security, from
  * what kind of hash will be used for passwords and such.

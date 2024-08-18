@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/.
  *
- * /////////////////////////////////////////////////////////////
+ * //////////////////////////////////////////////////////////////////////
  *
  * This class will be useful for later when handling security-related
  * implementations, like JWT tokens, and user authentication and

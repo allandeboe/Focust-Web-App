@@ -1,12 +1,28 @@
 /**
- * UserPage.tsx
+ *  UserPage.tsx -- Handles the creation of the profile page of each user (see below for more details)
+ *  Copyright (C) 2023  Allan DeBoe
  * 
- * This handles the general page for a given user. This is
- * important as there will be users on the site and we 
- * need a way to display general user information.
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  * 
- * @author Allan DeBoe <allan.m.deboe@gmail.com>
- * @date November 24th, 2023
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see https://www.gnu.org/licenses/
+ * 
+ *  //////////////////////////////////////////////////////////////////////
+ * 
+ *  This handles the general profile page for a given user. This is
+ *  important as there will be users on the site and we 
+ *  need a way to display general user information.
+ * 
+ *  @author Allan DeBoe <allan.m.deboe@gmail.com>
+ *  @date   November 24th, 2023
  */
 
 import { Component } from "react";
