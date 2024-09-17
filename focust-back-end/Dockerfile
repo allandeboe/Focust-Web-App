@@ -23,7 +23,7 @@ WORKDIR /usr/src/focust-spring-app/
 # there are problems with the installation of
 # certain packages due to issues with deb.debian.org:80
 RUN chmod +x ./dependencies.sh
-RUN ["./dependencies.sh"]
+RUN ["bash", "./dependencies.sh"]
 
 # BUILD TARGET & RUN
 CMD ["mvn", "spring-boot:run"]

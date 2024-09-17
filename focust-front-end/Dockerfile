@@ -23,7 +23,7 @@ WORKDIR /usr/src/focust-react-app/
 # there are problems with the installation of
 # certain packages due to issues with deb.debian.org:80
 RUN chmod +x ./dependencies.sh
-RUN ["./dependencies.sh"]
+RUN ["bash", "./dependencies.sh"]
 
 # UPDATE NPM IF NEEDED
 RUN npm update

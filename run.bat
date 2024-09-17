@@ -14,7 +14,7 @@ START /wait docker compose up
 
 ECHO.
 ECHO "Shutting down..."
-CALL docker compose down
+CALL docker compose down --remove-orphans
 
 ECHO.
 ECHO "Done!"
