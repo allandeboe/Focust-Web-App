@@ -110,12 +110,12 @@ pipeline {
         stage ("Stage 3a: Run Database Docker Container") {
             steps {
                 sh """
-                    docker run --name ${DATABASE_DOCKER_NAME} \ 
-                    -e MYSQL_DATABASE=focust-db \ 
-                    -e MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_CREDENTIALS_PSW \ 
-                    --network ${BACK-END_DATABASE_NETWORK_NAME} \ 
-                    --restart=always \ 
-                    -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \ 
+                    docker run --name ${DATABASE_DOCKER_NAME} \
+                    -e MYSQL_DATABASE=focust-db \
+                    -e MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_CREDENTIALS_PSW \
+                    --network ${BACK-END_DATABASE_NETWORK_NAME} \
+                    --restart=always \
+                    -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \
                     -d mysql:latest
                 """
             }
@@ -124,9 +124,9 @@ pipeline {
         stage ("Stage 3b: Run Back-end Server Container") {
             steps {
                 sh """
-                    docker run --name ${BACK-END_SERVER_DOCKER_NAME} \ 
-                    --restart=always \ 
-                    -p ${BACK-END_HOST_PORT}:${BACK-END_CONTAINER_PORT} \ 
+                    docker run --name ${BACK-END_SERVER_DOCKER_NAME} \
+                    --restart=always \
+                    -p ${BACK-END_HOST_PORT}:${BACK-END_CONTAINER_PORT} \
                     -d ${BACK-END_SERVER_DOCKER_TAG}
                 """
                 sh "docker network connect ${BACK-END_DATABASE_NETWORK_NAME} ${BACK-END_SERVER_DOCKER_NAME}"
@@ -137,8 +137,8 @@ pipeline {
         stage ("Stage 3c: Run Front-end Server Container") {
             steps {
                 sh """
-                    docker run --name ${FRONT-END_SERVER_DOCKER_NAME} \ 
-                    -p ${FRONT-END_HOST_PORT}:${FRONT-END_CONTAINER_PORT} \ 
+                    docker run --name ${FRONT-END_SERVER_DOCKER_NAME} \
+                    -p ${FRONT-END_HOST_PORT}:${FRONT-END_CONTAINER_PORT} \
                     -d ${FRONT-END_SERVER_DOCKER_TAG}
                 """
                 sh "docker network connect ${FRONT-END_BACK-END_NETWORK_NAME} ${FRONT-END_SERVER_DOCKER_NAME}"
