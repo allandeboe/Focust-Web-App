@@ -5,8 +5,9 @@
  * @date    September 17th, 2024
  */
 pipeline {
-    agent any
-
+    agent {
+        label 'linux'
+    }
     environment {
 
         // Jenkins credentials are used since we are creating the project from repo
