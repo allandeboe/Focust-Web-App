@@ -16,23 +16,23 @@ pipeline {
         SPRING_SECURITY_CREDENTIALS = credentials('focust-spring-security')
 
         DATABASE_VOLUME_NAME = 'mysql-data'
-        BACK-END_DATABASE_NETWORK_NAME = 'spring-mysql'
-        FRONT-END_BACK-END_NETWORK_NAME = 'react-spring'
+        BACK_END_DATABASE_NETWORK_NAME = 'spring-mysql'
+        FRONT_END_BACK_END_NETWORK_NAME = 'react-spring'
 
         DATABASE_DOCKER_NAME = "focust-mysql"
         DATABASE_HOST_PORT = '3307'
         DATABASE_CONTAINER_PORT = '3306'
 
-        BACK-END_SERVER_DOCKER_NAME = 'focust-spring-app'
-        BACK-END_SERVER_DOCKER_TAG = "spring-app"
-        BACK-END_HOST_PORT = '8080'
-        BACK-END_CONTAINER_PORT = '8080'
-        BACK-END_SERVER_MODE = 'dev' // for ./focust-back-end/src/main/resources/application.properties
+        BACK_END_SERVER_DOCKER_NAME = 'focust-spring-app'
+        BACK_END_SERVER_DOCKER_TAG = "spring-app"
+        BACK_END_HOST_PORT = '8080'
+        BACK_END_CONTAINER_PORT = '8080'
+        BACK_END_SERVER_MODE = 'dev' // for ./focust-back-end/src/main/resources/application.properties
 
-        FRONT-END_SERVER_DOCKER_NAME = 'focust-react-app'
-        FRONT-END_SERVER_DOCKER_TAG = "react-app"
-        FRONT-END_HOST_PORT = '3000'
-        FRONT-END_CONTAINER_PORT = '3000'
+        FRONT_END_SERVER_DOCKER_NAME = 'focust-react-app'
+        FRONT_END_SERVER_DOCKER_TAG = "react-app"
+        FRONT_END_HOST_PORT = '3000'
+        FRONT_END_CONTAINER_PORT = '3000'
 
     }
 
@@ -61,8 +61,8 @@ pipeline {
                 // is needed to run the back-end server, we need to create it ourselves
                 sh 'mkdir ./src/main/resources'
                 sh 'cd ./src/main/resources'
-                sh """echo "focust.server-mode=${BACK-END_SERVER_MODE}" > application.properties"""
-                sh """echo "server.port=${BACK-END_HOST_PORT}" > application.properties"""
+                sh """echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties"""
+                sh """echo "server.port=${BACK_END_HOST_PORT}" > application.properties"""
                 sh """echo "spring.jpa.hibernate.ddl-auto=update" > application.properties"""
                 sh """echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties"""
                 sh """echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties"""
@@ -78,7 +78,7 @@ pipeline {
                 // Dockerfile.
                 sh 'cd ../../../'
                 sh 'ls'
-                sh "docker buildx --tag ${BACK-END_SERVER_DOCKER_TAG}"
+                sh "docker buildx --tag ${BACK_END_SERVER_DOCKER_TAG}"
                 sh 'cd ../'
             }
         }
@@ -91,10 +91,10 @@ pipeline {
                 // We will need to modify the package.json to change the proxy to match that with the
                 // environment variables used in this Jenkinsfile. 
                 sh 'mv package.json package-temp.json'
-                sh "jq -r '.proxy |= \"http://${BACK-END_SERVER_DOCKER_TAG}:${BACK-END_HOST_PORT}\"' package-temp.json > package.json"
+                sh "jq -r '.proxy |= \"http://${BACK_END_SERVER_DOCKER_TAG}:${BACK_END_HOST_PORT}\"' package-temp.json > package.json"
                 sh 'rm package-temp.json'
 
-                sh "docker buildx --tag ${FRONT-END_SERVER_DOCKER_TAG}"
+                sh "docker buildx --tag ${FRONT_END_SERVER_DOCKER_TAG}"
                 sh 'cd ../'
             }
         }
@@ -102,8 +102,8 @@ pipeline {
         stage ("Stage 2: Set up Networks & Volumes") {
             steps {
                 sh "docker volume create ${DATABASE_VOLUME_NAME} --force"
-                sh "docker network create ${BACK-END_DATABASE_NETWORK_NAME} --force"
-                sh "docker network create ${FRONT-END_BACK-END_NETWORK_NAME} --force"
+                sh "docker network create ${BACK_END_DATABASE_NETWORK_NAME} --force"
+                sh "docker network create ${FRONT_END_BACK_END_NETWORK_NAME} --force"
             }
         }
 
@@ -113,7 +113,7 @@ pipeline {
                     docker run --name ${DATABASE_DOCKER_NAME} \
                     -e MYSQL_DATABASE=focust-db \
                     -e MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_CREDENTIALS_PSW \
-                    --network ${BACK-END_DATABASE_NETWORK_NAME} \
+                    --network ${BACK_END_DATABASE_NETWORK_NAME} \
                     --restart=always \
                     -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \
                     -d mysql:latest
@@ -124,24 +124,24 @@ pipeline {
         stage ("Stage 3b: Run Back-end Server Container") {
             steps {
                 sh """
-                    docker run --name ${BACK-END_SERVER_DOCKER_NAME} \
+                    docker run --name ${BACK_END_SERVER_DOCKER_NAME} \
                     --restart=always \
-                    -p ${BACK-END_HOST_PORT}:${BACK-END_CONTAINER_PORT} \
-                    -d ${BACK-END_SERVER_DOCKER_TAG}
+                    -p ${BACK_END_HOST_PORT}:${BACK_END_CONTAINER_PORT} \
+                    -d ${BACK_END_SERVER_DOCKER_TAG}
                 """
-                sh "docker network connect ${BACK-END_DATABASE_NETWORK_NAME} ${BACK-END_SERVER_DOCKER_NAME}"
-                sh "docker network connect ${FRONT-END_BACK-END_NETWORK_NAME} ${BACK-END_SERVER_DOCKER_NAME}"
+                sh "docker network connect ${BACK_END_DATABASE_NETWORK_NAME} ${BACK_END_SERVER_DOCKER_NAME}"
+                sh "docker network connect ${FRONT_END_BACK_END_NETWORK_NAME} ${BACK_END_SERVER_DOCKER_NAME}"
             }
         }
 
         stage ("Stage 3c: Run Front-end Server Container") {
             steps {
                 sh """
-                    docker run --name ${FRONT-END_SERVER_DOCKER_NAME} \
-                    -p ${FRONT-END_HOST_PORT}:${FRONT-END_CONTAINER_PORT} \
-                    -d ${FRONT-END_SERVER_DOCKER_TAG}
+                    docker run --name ${FRONT_END_SERVER_DOCKER_NAME} \
+                    -p ${FRONT_END_HOST_PORT}:${FRONT_END_CONTAINER_PORT} \
+                    -d ${FRONT_END_SERVER_DOCKER_TAG}
                 """
-                sh "docker network connect ${FRONT-END_BACK-END_NETWORK_NAME} ${FRONT-END_SERVER_DOCKER_NAME}"
+                sh "docker network connect ${FRONT_END_BACK_END_NETWORK_NAME} ${FRONT_END_SERVER_DOCKER_NAME}"
             }
         }
 
