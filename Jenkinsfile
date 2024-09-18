@@ -109,7 +109,7 @@ pipeline {
 
         stage("Stage 3a: Run Database Docker Container") {
             steps {
-                sh """
+                sh '''
                     docker run --name ${DATABASE_DOCKER_NAME} \
                     -e MYSQL_DATABASE=focust-db \
                     -e MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_CREDENTIALS_PSW \
@@ -117,18 +117,18 @@ pipeline {
                     --restart=always \
                     -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \
                     -d mysql:latest
-                """
+                '''
             }
         }
 
         stage("Stage 3b: Run Back-end Server Container") {
             steps {
-                sh """
+                sh '''
                     docker run --name ${BACK_END_SERVER_DOCKER_NAME} \
                     --restart=always \
                     -p ${BACK_END_HOST_PORT}:${BACK_END_CONTAINER_PORT} \
                     -d ${BACK_END_SERVER_DOCKER_TAG}
-                """
+                '''
                 sh "docker network connect ${BACK_END_DATABASE_NETWORK_NAME} ${BACK_END_SERVER_DOCKER_NAME}"
                 sh "docker network connect ${FRONT_END_BACK_END_NETWORK_NAME} ${BACK_END_SERVER_DOCKER_NAME}"
             }
@@ -136,11 +136,11 @@ pipeline {
 
         stage("Stage 3c: Run Front-end Server Container") {
             steps {
-                sh """
+                sh '''
                     docker run --name ${FRONT_END_SERVER_DOCKER_NAME} \
                     -p ${FRONT_END_HOST_PORT}:${FRONT_END_CONTAINER_PORT} \
                     -d ${FRONT_END_SERVER_DOCKER_TAG}
-                """
+                '''
                 sh "docker network connect ${FRONT_END_BACK_END_NETWORK_NAME} ${FRONT_END_SERVER_DOCKER_NAME}"
             }
         }
