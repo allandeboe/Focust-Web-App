@@ -40,7 +40,7 @@ pipeline {
 
         // Ensure that we do have Docker, as this pipeline's job is similar to that of
         // docker-compose.yml file; Build & Run the needed docker containers
-        stage ("Stage 0: Check Tooling") {
+        stage("Stage 0: Check Tooling") {
             steps {
                 sh 'docker version'
                 sh 'docker info'
@@ -52,7 +52,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 1a: Set up Back-end Server Image") {
+        stage("Stage 1a: Set up Back-end Server Image") {
             steps {
                 sh 'ls'
                 sh 'cd ./focust-back-end'
@@ -83,7 +83,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 1b: Set up Front-end Server Image") {
+        stage("Stage 1b: Set up Front-end Server Image") {
             steps {
                 sh 'ls'
                 sh 'cd ./focust-front-end' // assuming we are back at root directory...
@@ -99,7 +99,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 2: Set up Networks & Volumes") {
+        stage("Stage 2: Set up Networks & Volumes") {
             steps {
                 sh "docker volume create ${DATABASE_VOLUME_NAME} --force"
                 sh "docker network create ${BACK_END_DATABASE_NETWORK_NAME} --force"
@@ -107,7 +107,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 3a: Run Database Docker Container") {
+        stage("Stage 3a: Run Database Docker Container") {
             steps {
                 sh """
                     docker run --name ${DATABASE_DOCKER_NAME} \
@@ -121,7 +121,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 3b: Run Back-end Server Container") {
+        stage("Stage 3b: Run Back-end Server Container") {
             steps {
                 sh """
                     docker run --name ${BACK_END_SERVER_DOCKER_NAME} \
@@ -134,7 +134,7 @@ pipeline {
             }
         }
 
-        stage ("Stage 3c: Run Front-end Server Container") {
+        stage("Stage 3c: Run Front-end Server Container") {
             steps {
                 sh """
                     docker run --name ${FRONT_END_SERVER_DOCKER_NAME} \
@@ -148,8 +148,12 @@ pipeline {
     }
     post {
         always {
-            sh 'docker system prune --all --force'
-            echo 'Finished pipeline!'
+            script {
+                if (getContext(hudson.FilePath)) {
+                    sh 'docker system prune --all --force'
+                }
+                echo 'Finished pipeline!'
+            }
         }
     }
 }
