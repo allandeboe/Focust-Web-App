@@ -61,17 +61,17 @@ pipeline {
                 // is needed to run the back-end server, we need to create it ourselves
                 sh 'mkdir ./src/main/resources'
                 sh 'cd ./src/main/resources'
-                sh """echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties"""
-                sh """echo "server.port=${BACK_END_HOST_PORT}" > application.properties"""
-                sh """echo "spring.jpa.hibernate.ddl-auto=update" > application.properties"""
-                sh """echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties"""
-                sh """echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties"""
-                sh """echo "spring.datasource.password=$MYSQL_DATABASE_CREDENTIALS_PSW" > application.properties"""
-                sh """echo "spring.security.user.name=$SPRING_SECURITY_CREDENTIALS_USR" > application.properties"""
-                sh """echo "spring.security.user.password=$SPRING_SECURITY_CREDENTIALS_PSW" > application.properties"""
-                sh """echo "management.endpoints.enabled-by-default=false" > application.properties"""
-                sh """echo "management.endpoint.health.enabled=true" > application.properties"""
-                sh """echo "management.endpoints.web.exposure.include=health" > application.properties"""
+                sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
+                sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
+                sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
+                sh 'echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties'
+                sh 'echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties'
+                sh 'echo "spring.datasource.password=$MYSQL_DATABASE_CREDENTIALS_PSW" > application.properties'
+                sh 'echo "spring.security.user.name=$SPRING_SECURITY_CREDENTIALS_USR" > application.properties'
+                sh 'echo "spring.security.user.password=$SPRING_SECURITY_CREDENTIALS_PSW" > application.properties'
+                sh 'echo "management.endpoints.enabled-by-default=false" > application.properties'
+                sh 'echo "management.endpoint.health.enabled=true" > application.properties'
+                sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
 
                 // Since we just need the application.properties file to have the back-end server working,
                 // we can go ahead and create the Docker image for the back-end server, which will run the 
