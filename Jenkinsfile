@@ -13,6 +13,7 @@ pipeline {
         // Jenkins credentials are used since we are creating the project from repo
         // and we need to ensure that sensitive information is not leaked when commiting
         // to the public repository.
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-id')
         MYSQL_DATABASE_CREDENTIALS = credentials('focust-mysql-database')
         SPRING_SECURITY_CREDENTIALS = credentials('focust-spring-security')
 
@@ -77,6 +78,7 @@ pipeline {
                 // Dockerfile.
                 sh 'cd ../../../'
                 sh 'ls'
+                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
                 sh "docker buildx --tag ${BACK_END_SERVER_DOCKER_TAG}"
                 sh 'cd ../'
             }
