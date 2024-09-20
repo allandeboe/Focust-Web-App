@@ -11,7 +11,7 @@ pipeline {
         stage("Build Back-end") {
             agent {
                 docker {
-                    image 'maven:3.5.0'
+                    image 'maven:3.9.9-ibm-semeru-21-jammy'
                 }
             }
             environment {
