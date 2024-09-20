@@ -8,7 +8,7 @@
 # @author   Allan DeBoe (allan.m.deboe@gmail.com)
 # @date     March 31st, 2024
 
-declare -a dependencies=("nodejs" "npm")
+declare -a dependencies=("nodejs" "npm" "jq")
 
 for value in "${dependencies[@]}"
 do
