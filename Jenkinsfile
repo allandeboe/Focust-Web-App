@@ -43,11 +43,8 @@ pipeline {
         // docker-compose.yml file; Build & Run the needed docker containers
         stage("Stage 0: Check Tooling") {
             steps {
-                sh 'apt-get install docker jq -y'
-
                 // "jq" is used to modify ./focust-front-end/package.json
                 sh 'jq --version'
-                
                 sh 'docker version'
                 sh 'docker info'
                 sh 'docker compose version'
