@@ -1,6 +1,8 @@
 # This is removed as it contains sensitive information
 /secrets
 docker-compose.yml
+jenkins_agent_key
+jenkins_agent_key.pub
 
 # IntelliJ Idea
 .idea
