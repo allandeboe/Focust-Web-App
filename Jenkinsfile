@@ -89,12 +89,15 @@ pipeline {
         stage("Build Front-end Image") {
             agent any 
             steps {
+                sh 'jq --version'
                 sh 'ls'
                 dir ('./focust-front-end') {
                     sh 'ls'
-                    sh 'mv package.json package-temp.json'
-                    sh "jq -r '.proxy |= \"http://focust-spring-app:${BACK-END_HOST_PORT}\"' package-temp.json > package.json"
-                    sh 'rm package-temp.json'
+                    sh 'mv package.json temp.json'
+                    sh '''
+                        jq '.proxy |= "http://focust-spring-app:${BACK_END_HOST_PORT}"' temp.json > package.json
+                    '''
+                    sh 'rm temp.json'
                     sh 'docker build -t allandeboe/focust-front-end:latest .'
                 }
                 sh 'docker ps'
