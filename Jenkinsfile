@@ -18,7 +18,7 @@ pipeline {
     }
     stages {
 
-        stage("Clean-up") {
+        stage("Create Networks & Volumes") {
             agent any
             steps {
                 echo 'Removing Networks & Volumes...'
@@ -26,6 +26,11 @@ pipeline {
                 sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
                 sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
                 echo 'Removed!'
+
+                echo 'Creating Networks & Volumes...'
+                sh 'docker network create ${BACK_END_DATABASE_NETWORK_NAME}'
+                sh 'docker network create ${FRONT_END_BACK_END_NETWORK_NAME}'
+                sh 'docker volume create ${DATABASE_VOLUME_NAME}'
             }
         }
 
@@ -38,8 +43,6 @@ pipeline {
                 DATABASE_CONTAINER_PORT = '3306'
             }
             steps {
-                sh 'docker network create ${BACK_END_DATABASE_NETWORK_NAME}'
-                sh 'docker volume create ${DATABASE_VOLUME_NAME}'
                 sh '''
                     docker run -d --name focust-mysql \
                     -e MYSQL_DATABASE=focust_db \
