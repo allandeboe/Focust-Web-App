@@ -75,8 +75,8 @@ pipeline {
                         sh 'echo "management.endpoint.health.enabled=true" > application.properties'
                         sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
                     }
+                    sh 'docker build -t allandeboe/focust-back-end:latest .'
                 }
-                sh 'docker build -t allandeboe/focust-back-end:latest .'
                 sh 'docker ps'
             }
         }
