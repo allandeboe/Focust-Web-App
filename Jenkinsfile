@@ -89,6 +89,7 @@ pipeline {
         stage("Build Front-end Image") {
             agent any 
             steps {
+                sh 'apt-get install jq -y'
                 sh 'jq --version'
                 sh 'ls'
                 dir ('./focust-front-end') {
