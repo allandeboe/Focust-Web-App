@@ -60,23 +60,23 @@ pipeline {
             }
             steps {
                 sh 'ls'
-                sh 'cd ./focust-back-end/src/main'
-                sh 'ls'
-                sh 'mkdir resources'
-                sh 'cd resources'
-                sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
-                sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
-                sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
-                sh 'echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties'
-                sh 'echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties'
-                sh 'echo "spring.datasource.password=$MYSQL_DATABASE_CREDENTIALS_PSW" > application.properties'
-                sh 'echo "spring.security.user.name=$SPRING_SECURITY_CREDENTIALS_USR" > application.properties'
-                sh 'echo "spring.security.user.password=$SPRING_SECURITY_CREDENTIALS_PSW" > application.properties'
-                sh 'echo "management.endpoints.enabled-by-default=false" > application.properties'
-                sh 'echo "management.endpoint.health.enabled=true" > application.properties'
-                sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
-
-                sh 'cd ../../../'
+                dir ('./focust-back-end/src/main') {
+                    sh 'ls'
+                    sh 'mkdir ./resources'
+                    dir ('./resources') {
+                        sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
+                        sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
+                        sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
+                        sh 'echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties'
+                        sh 'echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties'
+                        sh 'echo "spring.datasource.password=$MYSQL_DATABASE_CREDENTIALS_PSW" > application.properties'
+                        sh 'echo "spring.security.user.name=$SPRING_SECURITY_CREDENTIALS_USR" > application.properties'
+                        sh 'echo "spring.security.user.password=$SPRING_SECURITY_CREDENTIALS_PSW" > application.properties'
+                        sh 'echo "management.endpoints.enabled-by-default=false" > application.properties'
+                        sh 'echo "management.endpoint.health.enabled=true" > application.properties'
+                        sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
+                    }
+                }
                 sh 'docker build -t allandeboe/focust-back-end:latest .'
                 sh 'docker ps'
             }
