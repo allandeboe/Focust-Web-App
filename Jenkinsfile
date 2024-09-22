@@ -22,6 +22,8 @@ pipeline {
                 DATABASE_CONTAINER_PORT = '3306'
             }
             steps {
+                sh 'docker network create ${BACK_END_DATABASE_NETWORK_NAME} --force'
+                sh 'docker volume create ${DATABASE_VOLUME_NAME} --force'
                 sh '''
                     docker run -d --name focust-mysql \
                     -e MYSQL_DATABASE=focust_db \
@@ -29,6 +31,7 @@ pipeline {
                     --network ${BACK_END_DATABASE_NETWORK_NAME} \
                     --restart=always \
                     -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \
+                    -v ${DATABASE_VOLUME_NAME} \
                     mysql:latest
                 '''
                 sh 'docker ls'
