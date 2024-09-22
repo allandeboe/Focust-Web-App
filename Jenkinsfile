@@ -49,12 +49,8 @@ pipeline {
             }
         }
 
-        stage("Build Back-end") {
-            agent {
-                docker {
-                    image 'maven:3.9.9-ibm-semeru-21-jammy'
-                }
-            }
+        stage("Build Back-end Image") {
+            agent any
             environment {
                 MYSQL_DATABASE_CREDENTIALS = credentials('focust-mysql-database')
                 SPRING_SECURITY_CREDENTIALS = credentials('focust-spring-security')
@@ -65,8 +61,9 @@ pipeline {
             steps {
                 sh 'ls'
                 sh 'cd ./focust-back-end/src/main'
-                sh 'mkdir ./resources'
-                sh 'cd ./resources'
+                sh 'ls'
+                sh 'mkdir resources'
+                sh 'cd resources'
                 sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
                 sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
                 sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
@@ -79,14 +76,8 @@ pipeline {
                 sh 'echo "management.endpoint.health.enabled=true" > application.properties'
                 sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
 
-                sh 'cd ../../../../'
-            }
-        }
-
-        stage("Build Back-End Image") {
-            agent any
-            steps {
-                sh 'docker build -t allandeboe/focust-back-end:latest ./focust-back-end'
+                sh 'cd ../../../'
+                sh 'docker build -t allandeboe/focust-back-end:latest .'
                 sh 'docker ps'
             }
         }
