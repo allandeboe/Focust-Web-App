@@ -33,7 +33,7 @@ Finally, click **Save**, which will lead you to the page of the new job. After t
 
 The build takes a while to load (that might change in future commits!), so be patient. You can see the progress made on the build by going to the "**Build History**" part of the page and clicking on the build number.
 
-![Image of the "Build History" section, with the text "#1" being highlighted in yellow](./references/jenkins-build-history.png))
+![Image of the "Build History" section, with the text "#1" being highlighted in yellow](./references/jenkins-build-history.png)
 
 You can also see the progress when you go back to the dashboard:
 
