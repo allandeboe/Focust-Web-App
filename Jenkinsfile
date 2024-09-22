@@ -10,6 +10,11 @@ pipeline {
         DATABASE_VOLUME_NAME = 'mysql-data'
         BACK_END_DATABASE_NETWORK_NAME = 'spring-mysql'
         FRONT_END_BACK_END_NETWORK_NAME = 'react-spring'
+
+        BACK_END_HOST_PORT = '8080'
+        BACK_END_CONTAINER_PORT = '8080'
+        FRONT_END_HOST_PORT = '3000'
+        FRONT_END_CONTAINER_PORT = '3000'
     }
     stages {
 
@@ -56,7 +61,6 @@ pipeline {
                 SPRING_SECURITY_CREDENTIALS = credentials('focust-spring-security')
 
                 BACK_END_SERVER_MODE = 'dev'
-                BACK_END_HOST_PORT = '8080'
             }
             steps {
                 sh 'ls'
@@ -67,6 +71,7 @@ pipeline {
                         sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
                         sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
                         sh 'echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" > application.properties'
+                        sh 'echo "spring.datasource.url=jdbc:mysql://mysql/focust_db" > application.properties'
                         sh 'echo "spring.datasource.username=$MYSQL_DATABASE_CREDENTIALS_USR" > application.properties'
                         sh 'echo "spring.datasource.password=$MYSQL_DATABASE_CREDENTIALS_PSW" > application.properties'
                         sh 'echo "spring.security.user.name=$SPRING_SECURITY_CREDENTIALS_USR" > application.properties'
@@ -81,19 +86,44 @@ pipeline {
             }
         }
 
+        stage("Build Front-end Image") {
+            agent any 
+            steps {
+                sh 'ls'
+                dir ('./focust-front-end') {
+                    sh 'ls'
+                    sh 'mv package.json package-temp.json'
+                    sh "jq -r '.proxy |= \"http://focust-spring-app:${BACK-END_HOST_PORT}\"' package-temp.json > package.json"
+                    sh 'rm package-temp.json'
+                    sh 'docker build -t allandeboe/focust-front-end:latest .'
+                }
+                sh 'docker ps'
+            }
+        }
+
         stage("Run Back-End Image") {
             agent any 
-            environment {
-                BACK_END_HOST_PORT = '8080'
-                BACK_END_CONTAINER_PORT = '8080'
-            }
             steps {
                 sh '''
                     docker run -d --name focust-spring-app \
                     --network ${BACK_END_DATABASE_NETWORK_NAME} \
+                    --network ${FRONT_END_BACK_END_NETWORK_NAME} \
                     --restart=always \
                     -p ${BACK_END_HOST_PORT}:${BACK_END_CONTAINER_PORT} \
                     allandeboe/focust-back-end:latest
+                '''
+            }
+        }
+
+        stage("Run Front-End Image") {
+            agent any 
+            steps {
+                sh '''
+                    docker run -d --name focust-react-app \
+                    --network ${FRONT_END_BACK_END_NETWORK_NAME} \
+                    --restart=always \
+                    -p ${FRONT_END_HOST_PORT}:${FRONT_END_CONTAINER_PORT} \
+                    allandeboe/focust-front-end:latest
                 '''
             }
         }
