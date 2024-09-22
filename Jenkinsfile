@@ -13,6 +13,17 @@ pipeline {
     }
     stages {
 
+        stage("Clean-up") {
+            agent any
+            steps {
+                echo 'Removing Networks & Volumes...'
+                sh 'docker network rm ${BACK_END_DATABASE_NETWORK_NAME} --force'
+                sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
+                sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
+                echo 'Removed!'
+            }
+        }
+
         stage("Build MySQL Database") {
             agent any
             environment {
@@ -53,8 +64,9 @@ pipeline {
             }
             steps {
                 sh 'ls'
-                sh 'mkdir ./focust-back-end/src/main/resources'
-                sh 'cd ./focust-back-end/src/main/resources'
+                sh 'cd ./focust-back-end/src/main'
+                sh 'mkdir ./resources'
+                sh 'cd ./resources'
                 sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
                 sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
                 sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
@@ -88,15 +100,6 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
-            script {
-                if (getContext(hudson.FilePath)) {
-                    echo 'Removing Networks & Volumes...'
-                    sh 'docker network rm ${BACK_END_DATABASE_NETWORK_NAME} --force'
-                    sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
-                    sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
-                    echo 'Removed!'
-                }
-            }
         }
     }
 }
