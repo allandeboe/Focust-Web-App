@@ -6,7 +6,34 @@
  */
 pipeline {
     agent none
+    environment {
+        DATABASE_VOLUME_NAME = 'mysql-data'
+        BACK_END_DATABASE_NETWORK_NAME = 'spring-mysql'
+        FRONT_END_BACK_END_NETWORK_NAME = 'react-spring'
+    }
     stages {
+
+        stage("Build MySQL Database") {
+            agent any
+            environment {
+                MYSQL_DATABASE_CREDENTIALS = credentials('focust-mysql-database')
+
+                DATABASE_HOST_PORT = '3307'
+                DATABASE_CONTAINER_PORT = '3306'
+            }
+            steps {
+                sh '''
+                    docker run -d --name focust-mysql \
+                    -e MYSQL_DATABASE=focust_db \
+                    -e MYSQL_ROOT_PASSWORD=$MYSQL_DATABASE_CREDENTIALS_PSW \
+                    --network ${BACK_END_DATABASE_NETWORK_NAME} \
+                    --restart=always \
+                    -p ${DATABASE_HOST_PORT}:${DATABASE_CONTAINER_PORT} \
+                    mysql:latest
+                '''
+                sh 'docker ls'
+            }
+        }
 
         stage("Build Back-end") {
             agent {
