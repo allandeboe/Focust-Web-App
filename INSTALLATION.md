@@ -8,8 +8,8 @@ To be able to run the program, one must have installed [**Docker**]() and [**Jen
 
 I recommend using my custom `jenkins/jenkins:lts-jdk17` Docker image on [my GitHub](https://github.com/allandeboe/jenkins-jdk17), as it contains all of the needed plugins and settings to run the `Jenkinsfile` and I use this Jenkins image when using Jenkins for my project with no issues. Also, it is in dark mode by default so you never have to subject your eyeballs to burning white light. 😉
 
-[!NOTE]
-You might want to make modifications to the host port for the back-end server inside the `Jenkinsfile` for your fork of the project as the back-end server runs on port `8080` by default - the same as *Jenkins*
+> [!NOTE]
+> You might want to make modifications to the host port for the back-end server inside the `Jenkinsfile` for your fork of the project as the back-end server runs on port `8080` by default - the same as *Jenkins*
 
 ## Setting up Jenkins
 After having Jenkins properly set up, you will need to log in to Jenkins (*of course!*), and make sure you either have a Linux-based Jenkins slave agent or use the Built-in Node (you will need to change the settings if you are using my custom Jenkins image, as my [custom Jenkins image](https://github.com/allandeboe/jenkins-jdk17) automatically sets the number of executors of the Built-in Node to `0`) available to run the Jenkinsfile.
