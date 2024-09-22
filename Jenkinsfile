@@ -63,7 +63,7 @@ pipeline {
                 MYSQL_DATABASE_CREDENTIALS = credentials('focust-mysql-database')
                 SPRING_SECURITY_CREDENTIALS = credentials('focust-spring-security')
 
-                BACK_END_SERVER_MODE = 'dev'
+                BACK_END_SERVER_MODE = 'prod'
             }
             steps {
                 sh 'ls'

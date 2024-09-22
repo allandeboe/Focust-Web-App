@@ -48,5 +48,7 @@ These are the dependencies that do not fall under the other two categories, and 
 
 * [**Docker**](https://www.docker.com/) - a piece of open-source software that deals with deploying software applications in *containers*, which are essentially like small & compact virtual machines. This is used to allow a more easy deployment process for this project, if I do decide to have this web application run on the web. 
 
+* [**Jenkins**](https://www.jenkins.io/) - an open-sourced automation server primarily used for CI/CD; In the context of this project, Jenkins is used to build and run the Docker images and containers needed to run the project.
+
 ## Installation, Set-up, & Interaction
 For instructions regarding the installation & set-up for both front-end and back-end servers, read the `INSTALLATION.md` file in this directory.
