@@ -4,6 +4,8 @@
  * @author  Allan DeBoe <allan.m.deboe@gmail.com>
  * @date    September 17th, 2024
  */
+#!groovy
+
 pipeline {
     agent none
     stages {
@@ -22,8 +24,9 @@ pipeline {
                 BACK_END_HOST_PORT = '8080'
             }
             steps {
-                sh 'mkdir .//src//main//resources'
-                sh 'cd .//src//main//resources'
+                sh 'ls'
+                sh 'mkdir ./focust-back-end/src/main/resources'
+                sh 'cd ./focust-back-end/src/main/resources'
                 sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
                 sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
                 sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
@@ -36,15 +39,16 @@ pipeline {
                 sh 'echo "management.endpoint.health.enabled=true" > application.properties'
                 sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
 
-                sh 'cd ..//..//..//'
+                sh 'cd ../../../'
                 sh 'mvn clean install'
+                sh 'cd ../'
             }
         }
 
         stage("Build Images") {
             agent any
             steps {
-                sh 'docker build -t allandeboe/focust-back-end .//focust-back-end'
+                sh 'docker build -t allandeboe/focust-back-end:latest ./focust-back-end'
                 sh 'docker ls'
             }
         }
