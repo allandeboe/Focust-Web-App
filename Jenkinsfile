@@ -22,22 +22,8 @@ pipeline {
                 DATABASE_CONTAINER_PORT = '3306'
             }
             steps {
-                script {
-                    DOCKER_NETWORK_CREATED = sh (
-                        script: 'docker network inspect ${BACK_END_DATABASE_NETWORK_NAME}'
-                        returnStatus: true
-                    )
-                    if (DOCKER_NETWORK_CREATED != 0) {
-                        sh 'docker network create ${BACK_END_DATABASE_NETWORK_NAME}'
-                    }
-                    DOCKER_VOLUME_CREATED sh (
-                        script: 'docker volume inspect ${DATABASE_VOLUME_NAME}'
-                        returnStatus: true
-                    )
-                    if (DOCKER_VOLUME_CREATED != 0) {
-                        sh 'docker volume create ${DATABASE_VOLUME_NAME}'
-                    }
-                }
+                sh 'docker network create ${BACK_END_DATABASE_NETWORK_NAME}'
+                sh 'docker volume create ${DATABASE_VOLUME_NAME}'
                 sh '''
                     docker run -d --name focust-mysql \
                     -e MYSQL_DATABASE=focust_db \
@@ -102,6 +88,11 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
+            echo 'Removing Networks & Volumes...'
+            sh 'docker network rm ${BACK_END_DATABASE_NETWORK_NAME} --force'
+            sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
+            sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
+            echo 'Removed!'
         }
     }
 }
