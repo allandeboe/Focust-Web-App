@@ -62,7 +62,6 @@ pipeline {
                 sh 'ls'
                 dir ('./focust-back-end/src/main') {
                     sh 'ls'
-                    sh 'mkdir ./resources'
                     dir ('./resources') {
                         sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
                         sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
