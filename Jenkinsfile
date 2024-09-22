@@ -79,17 +79,32 @@ pipeline {
                 sh 'echo "management.endpoint.health.enabled=true" > application.properties'
                 sh 'echo "management.endpoints.web.exposure.include=health" > application.properties'
 
-                sh 'cd ../../../'
-                sh 'mvn clean install'
-                sh 'cd ../'
+                sh 'cd ../../../../'
             }
         }
 
-        stage("Build Images") {
+        stage("Build Back-End Image") {
             agent any
             steps {
                 sh 'docker build -t allandeboe/focust-back-end:latest ./focust-back-end'
                 sh 'docker ps'
+            }
+        }
+
+        stage("Run Back-End Image") {
+            agent any 
+            environment {
+                BACK_END_HOST_PORT = '8080'
+                BACK_END_CONTAINER_PORT = '8080'
+            }
+            steps {
+                sh '''
+                    docker run -d --name focust-spring-app \
+                    --network ${BACK_END_DATABASE_NETWORK_NAME} \
+                    --restart=always \
+                    -p ${BACK_END_HOST_PORT}:${BACK_END_CONTAINER_PORT} \
+                    allandeboe/focust-back-end:latest
+                '''
             }
         }
 
