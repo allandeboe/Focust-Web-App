@@ -88,11 +88,15 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
-            echo 'Removing Networks & Volumes...'
-            sh 'docker network rm ${BACK_END_DATABASE_NETWORK_NAME} --force'
-            sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
-            sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
-            echo 'Removed!'
+            script {
+                if (getContext(hudson.FilePath)) {
+                    echo 'Removing Networks & Volumes...'
+                    sh 'docker network rm ${BACK_END_DATABASE_NETWORK_NAME} --force'
+                    sh 'docker network rm ${FRONT_END_BACK_END_NETWORK_NAME} --force'
+                    sh 'docker volume rm ${DATABASE_VOLUME_NAME} --force'
+                    echo 'Removed!'
+                }
+            }
         }
     }
 }
