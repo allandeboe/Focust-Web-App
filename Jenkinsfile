@@ -60,9 +60,9 @@ pipeline {
             }
             steps {
                 sh 'ls'
-                dir ('./focust-back-end/src/main') {
+                dir ('./focust-back-end') {
                     sh 'ls'
-                    dir ('./resources') {
+                    dir ('./src/main/resources') {
                         sh 'echo "focust.server-mode=${BACK_END_SERVER_MODE}" > application.properties'
                         sh 'echo "server.port=${BACK_END_HOST_PORT}" > application.properties'
                         sh 'echo "spring.jpa.hibernate.ddl-auto=update" > application.properties'
