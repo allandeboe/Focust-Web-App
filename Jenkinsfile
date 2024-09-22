@@ -4,8 +4,6 @@
  * @author  Allan DeBoe <allan.m.deboe@gmail.com>
  * @date    September 17th, 2024
  */
-#!groovy
-
 pipeline {
     agent none
     stages {
