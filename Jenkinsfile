@@ -34,7 +34,7 @@ pipeline {
                     -v ${DATABASE_VOLUME_NAME} \
                     mysql:latest
                 '''
-                sh 'docker ls'
+                sh 'docker ps'
             }
         }
 
@@ -77,7 +77,7 @@ pipeline {
             agent any
             steps {
                 sh 'docker build -t allandeboe/focust-back-end:latest ./focust-back-end'
-                sh 'docker ls'
+                sh 'docker ps'
             }
         }
 
