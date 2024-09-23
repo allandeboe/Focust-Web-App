@@ -25,10 +25,6 @@
 
   /** Body Elements **/
 
-  h1, h2 {
-    @apply font-bold text-6xl tracking-tighter leading-none;
-  }
-
   hr {
     border-color: #404040;
     @apply mb-2;
@@ -46,81 +42,49 @@
     @apply py-2;
   }
 
-  /** Hyperlinks (Main) **/
-
-  .main a {
-    transition: color 0.75s, text-shadow 0.7s;
-    text-shadow: 0px 0px 0px #101010;
-    @apply no-underline text-purple-300;
-  }
-
-  .main a:hover {
-    text-shadow: 0px 0px 8px #f472b6;
-    @apply text-pink-300;
-  }
-
-  .main p a {
-    @apply italic;
-  }
-
-  .main p b a {
-    font-style: normal;
-    @apply font-bold;
-  }
-
-  /** Bold / Italic (Main) **/
+  /** Bold / Italic **/
 
   b {
     @apply font-bold;
   }
-
+  
   i {
     @apply italic;
   }
 
-  /** Hyperlinks (Navigation) **/
-
-  .navigation {
+  .bg-dark-gray {
     background-color: #101010;
-    @apply text-center p-4;
   }
 
-  nav {
-    @apply p-1;
+  /** (Large text will need tighter spacing) **/
+  .text-large {
+    @apply text-lg tracking-tight;
+  }
+  .text-extra-large {
+    @apply text-6xl tracking-tighter;
   }
 
-  nav a {
-    transition: text-shadow 0.75s;
+  /** Text Shadows **/
+
+  .text-shadow-dark-gray {
     text-shadow: 0px 0px 0px #101010;
-    @apply p-3 text-center text-lg text-white font-bold tracking-tight;
+  }
+  .text-shadow-purple {
+    text-shadow: 0px 0px 8px #4c1d95;
+  }
+  .text-shadow-pink {
+    text-shadow: 0px 0px 8px #f472b6;
   }
 
-  nav a:hover {
-    text-shadow: 0px 0px 16px #4c1d95;
+  /** Page-Links **/
+
+  .page-link {
+    transition: color 0.75s, text-shadow 0.75s;
+    @apply text-shadow-dark-gray no-underline text-purple-300;
   }
 
-  /** Custom Classes **/
-
-  .segment {
-    @apply m-4 p-4 text-white;
-  }
-
-  .container {
-    @apply flex flex-wrap;
-
-    /**
-     * This fixes the problem of the container width not expanding to the entire possible width,
-     * making any grid elements awkwardly placed. This is due to the @media (min-width ...) tags
-     * in the generated "main_style.css" file, which set max-widths to certain px widths depending
-     * on the given min-width.
-     */
-    @apply min-w-full;
-  }
-
-  .container > div {
-    background-color: #101010;
-    @apply grow basis-96;
-    @apply segment rounded-lg;
+  a.page-link:hover {
+    @apply text-shadow-pink text-pink-300;
   }
 
   /** Page Transitions **/
@@ -129,7 +93,6 @@
     animation: 0.25s fade-in forwards;
     @apply ease-in;
   }
-
   .fade-out {
     animation: 0.25s fade-out forwards;
     @apply ease-out;
@@ -143,7 +106,6 @@
       @apply out;
     }
   }
-
   @keyframes fade-in {
     from {
       @apply out;
@@ -159,7 +121,6 @@
     transform: translate(0rem, 0rem);
     @apply opacity-100 blur-none;
   }
-
   .out {
     transform: translate(0rem, -1rem);
     @apply opacity-0 blur-sm;

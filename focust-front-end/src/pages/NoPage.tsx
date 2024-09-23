@@ -24,23 +24,28 @@
  */
 
 import { Component } from "react";
-import { Link } from "react-router-dom";
+
+import { Heading1 } from '../components/headers/Heading1';
+import { Container } from '../components/Container';
+import { Segment } from '../components/Segment';
+import { OpaqueSegment } from '../components/OpaqueSegment';
+import { PageLink } from '../components/PageLink';
 
 export default class Home extends Component {
 
     render() {
         return (
             <div className="text-center">
-                <div className="segment">
-                    <h1>Page not found or doesn't exist</h1>
-                </div>
-                <div className="container">
-                    <div className="dark-segment">
+                <Segment>
+                    <Heading1>Page not found or doesn't exist</Heading1>
+                </Segment>
+                <Container>
+                    <OpaqueSegment>
                         <p>
-                        To go back to the main page, <Link to="/">click here!</Link>
+                        To go back to the main page, <PageLink to="/">click here!</PageLink>
                         </p>
-                    </div>
-                </div>
+                    </OpaqueSegment>
+                </Container>
             </div>
         );
     }

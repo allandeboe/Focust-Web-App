@@ -24,33 +24,39 @@
  *  @date   November 12th, 2023
  */
 import { Component } from "react";
-import { Link } from "react-router-dom";
+
+import { Heading1 } from '../components/headers/Heading1';
+import { Heading2 } from '../components/headers/Heading2';
+import { Container } from '../components/Container';
+import { Segment } from '../components/Segment';
+import { OpaqueSegment } from '../components/OpaqueSegment';
+import { PageLink } from '../components/PageLink';
 
 export default class Home extends Component {
 
     render() {
         return (
             <div>
-                <div className="segment text-center">
-                    <h1>Focust</h1>
-                </div>
-                <div className="container">
-                    <div className="dark-segment">
-                        <h1>An <Link to="https://www.atlassian.com/software/jira">issue tracker web app</Link> of all time!</h1>
+                <Segment className="text-center">
+                    <Heading1>Focust</Heading1>
+                </Segment>
+                <Container>
+                    <OpaqueSegment>
+                        <Heading2>An <PageLink to="https://www.atlassian.com/software/jira">issue tracker web app</PageLink> of all time!</Heading2>
                         <p>
                         Focust is an issue tracker web app that is made 
-                        using <Link to="https://react.dev/">React.js</Link>
-                        , <Link to="https://www.typescriptlang.org/">TypeScript</Link>
-                        , <Link to="https://tailwindcss.com/">Tailwind CSS</Link>
-                        , <Link to="https://spring.io/">Java Spring</Link>
-                        , and <Link to="https://www.mysql.com/">MySQL</Link>.
+                        using <PageLink to="https://react.dev/">React.js</PageLink>
+                        , <PageLink to="https://www.typescriptlang.org/">TypeScript</PageLink>
+                        , <PageLink to="https://tailwindcss.com/">Tailwind CSS</PageLink>
+                        , <PageLink to="https://spring.io/">Java Spring</PageLink>
+                        , and <PageLink to="https://www.mysql.com/">MySQL</PageLink>.
                         </p>
-                    </div>
-                    <div className="dark-segment">
-                        <h1>Lorem Ipsum</h1>
+                    </OpaqueSegment>
+                    <OpaqueSegment>
+                        <Heading2>Lorem Ipsum</Heading2>
                         <p>  </p>
-                    </div>
-                </div>
+                    </OpaqueSegment>
+                </Container>
             </div>
         );
     }

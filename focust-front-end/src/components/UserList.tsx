@@ -25,8 +25,9 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import '../main_style.css';
+
+import { PageLink } from './PageLink';
 
 ///////////////////////////////////////
 
@@ -56,7 +57,7 @@ function NoUsersDisplay() {
 function BasicUserDisplay(user: BasicUserDetails) {
     return (
         <tr key={user.id}>
-            <td><Link to={`/users/${user.id}`}>{user.username}</Link></td>
+            <td><PageLink to={`/users/${user.id}`}>{user.username}</PageLink></td>
             <td>{user.email}</td>
         </tr>
     );

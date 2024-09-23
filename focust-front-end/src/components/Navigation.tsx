@@ -32,14 +32,14 @@ export class Navigation extends Component {
 
     render() {
         return (
-            <div className="navigation">
+            <div className="text-center p-4 bg-dark-gray">
                 <div className="text-center block" style={{ margin: "auto", width: "15%" }}>
                     <img src={Banner} alt="Focust Banner" className="w-full"/>
                 </div>
-                <nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/about-us">About Us</Link>
-                    <Link to="/users">Users</Link>
+                <nav className="p-1">
+                    <Link className="text-shadow-dark-gray p-3 text-center text-large text-white font-bold" to="/">Home</Link>
+                    <Link className="text-shadow-dark-gray p-3 text-center text-large text-white font-bold" to="/about-us">About Us</Link>
+                    <Link className="text-shadow-dark-gray p-3 text-center text-large text-white font-bold" to="/users">Users</Link>
                 </nav>
             </div>
         );

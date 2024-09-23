@@ -11,8 +11,8 @@ pipeline {
         BACK_END_DATABASE_NETWORK_NAME = 'spring-mysql'
         FRONT_END_BACK_END_NETWORK_NAME = 'react-spring'
 
-        BACK_END_HOST_PORT = '8080'
-        BACK_END_CONTAINER_PORT = '8080'
+        BACK_END_HOST_PORT = '5080'
+        BACK_END_CONTAINER_PORT = '5080'
         FRONT_END_HOST_PORT = '3000'
         FRONT_END_CONTAINER_PORT = '3000'
     }

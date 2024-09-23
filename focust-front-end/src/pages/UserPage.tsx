@@ -29,6 +29,11 @@ import { Component } from "react";
 import { useParams } from "react-router-dom";
 
 import UserProjectList from "../components/UserProjectList";
+import { Heading1 } from '../components/headers/Heading1';
+import { Heading2 } from '../components/headers/Heading2';
+import { Container } from '../components/Container';
+import { Segment } from '../components/Segment';
+import { OpaqueSegment } from '../components/OpaqueSegment';
 
 import NoPage from "./NoPage";
 
@@ -100,11 +105,11 @@ class UserPageClass extends Component {
 
         return (
             <div>
-                <div className="segment text-center">
-                    <h1>{user.username}</h1>
-                </div>
-                <div className="container">
-                    <div className="dark-segment">
+                <Segment className="text-center">
+                    <Heading1>{user.username}</Heading1>
+                </Segment>
+                <Container>
+                    <OpaqueSegment>
                         <table>
                             <thead>
                                 <th>Email</th>
@@ -115,14 +120,14 @@ class UserPageClass extends Component {
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div className="container">
-                    <div className="dark-segment">
-                        <h2>Projects</h2>
+                    </OpaqueSegment>
+                </Container>
+                <Container>
+                    <OpaqueSegment>
+                        <Heading2>Projects</Heading2>
                         <UserProjectList params={this.props}/>
-                    </div>
-                </div>
+                    </OpaqueSegment>
+                </Container>
             </div>
         );
             

@@ -47,7 +47,7 @@ export default function Main() {
     }, [location, displayLocation])
 
     return (
-        <div className={`main ${transitionStage}`} onAnimationEnd={() => {
+        <div className={`${transitionStage}`} onAnimationEnd={() => {
             if (transitionStage === "fade-out") {
                 setTransitionStage("fade-in");
                 setDisplayLocation(location);

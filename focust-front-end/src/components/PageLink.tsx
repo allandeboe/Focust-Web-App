@@ -1,6 +1,6 @@
 /**
- *  Users.tsx -- handles the users page (see below for more details)
- *  Copyright (C) 2023  Allan DeBoe
+ *  PageLink.tsx -- used over default "Link" component (see below for more details)
+ *  Copyright (C) 2024  Allan DeBoe
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,34 +17,25 @@
  * 
  *  //////////////////////////////////////////////////////////////////////
  * 
- *  This handles the users page, which lists out all of the users
- *  of the site.
+ *  This component is used to replace the "Link" component (except for a
+ *  few key places, like the Navigation bar).
  * 
  *  @author Allan DeBoe <allan.m.deboe@gmail.com>
- *  @date   November 12th, 2023
+ *  @date   September 22nd, 2024
  */
+
 import { Component } from "react";
-import { UserList } from "../components/UserList";
+import { Link } from "react-router-dom";
 
-import { Heading1 } from '../components/headers/Heading1';
-import { Container } from '../components/Container';
-import { Segment } from '../components/Segment';
-import { OpaqueSegment } from '../components/OpaqueSegment';
+import { PageLinkProps } from '../utility/PageLinkProps';
 
-export default class Users extends Component {
+export class PageLink extends Component<PageLinkProps> {
 
     render() {
         return (
-            <div>
-                <Segment className="text-center">
-                    <Heading1>Users</Heading1>
-                </Segment>
-                <Container>
-                    <OpaqueSegment>
-                        <UserList/>
-                    </OpaqueSegment>
-                </Container>
-            </div>
+            <Link className={`page-link ${this.props.className}`} to={this.props.to}>
+                {this.props.children}
+            </Link>
         );
     }
 
