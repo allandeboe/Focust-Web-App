@@ -1,5 +1,9 @@
 # Focust - Issue Tracker Web Application
 ![Banner for Focust](./references/banner.png)
+
+> [!WARNING]
+> This repository is now archived, as I decided to rework the project. If you want to see the current rework, please go [*here*](https://github.com/allandeboe/focust)
+
 Focust is an issue tracker made using *Java Spring*, *MySQL*, *React.js*, *TypeScript*, and *TailwindCSS*. 
 
 Currently, the back-end server is able to handle user creation and stores passwords via bcrypt into the database, and able to return information about users without leaking their sensitive information. Later, the project will support authentication tokens and authorization to prevent third-parties from modifying the database as well as allow certain permissions for site admins and project owners to modify the database contents, plus other details. 
